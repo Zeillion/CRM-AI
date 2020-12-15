@@ -1,4 +1,4 @@
-
+###crm-ai 商品档案管理系统
 ```bash
 ├── build                      # 构建相关
 ├── mock                       # 项目mock 模拟数据
