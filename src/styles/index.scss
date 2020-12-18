@@ -63,3 +63,20 @@ div:focus {
 .app-container {
   padding: 20px;
 }
+
+// general class
+.flex_wrapper{
+  display: flex;
+  justify-content: space-between;
+}
+.flex_container{
+  display: flex;
+  justify-content: flex-start;
+}
+.flex_box{
+  display: flex;
+  justify-content: flex-end;
+}
+.wrapper{
+  margin:16px;
+}
