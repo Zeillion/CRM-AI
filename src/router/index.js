@@ -56,39 +56,50 @@ export const constantRoutes = [
   },
 
   {
-    path: '/example',
+    path: '/product',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    redirect: '/product/index',
+    name: 'product',
+    // meta: { title: '商品档案清单', icon: 'el-icon-s-help' },
     children: [
       {
         path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        name: 'Product',
+        component: () => import('@/views/product/index'),
+        meta: { title: '商品档案清单', icon: 'table' }
       }
     ]
   },
 
+  // 数据字典
   {
-    path: '/form',
+    path: '/dictionary',
     component: Layout,
+    redirect: '/dictionary/index',
     children: [
       {
         path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        name: 'Dictionary',
+        component: () => import('@/views/dictionary/index'),
+        meta: { title: '数据字典', icon: 'form' }
       }
     ]
   },
+  // 产品组合设置
+  {
+    path: '/assemble',
+    component: Layout,
+    redirect: '/assemble/index',
+    children: [
+      {
+        path: 'index',
+        name: 'Assemble',
+        component: () => import('@/views/assemble/index'),
+        meta: { title: '产品组合设置', icon: 'form' }
+      }
+    ]
+  },
+
 
   {
     path: '/nested',
