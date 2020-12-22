@@ -10,17 +10,21 @@
       <el-table-column prop="time" label="上报时间"> </el-table-column>
       <el-table-column label="操作"> 
         <template slot-scope="{row}">
-          <el-button size="small" type="text">审批</el-button>
+          <el-button size="small" type="text" @click="approval">审批</el-button>
         </template>
       </el-table-column>
     </el-table>
+    <approval-dialog ref="approval"></approval-dialog>
   </div>
 </template>
 
 <script>
+import approvalDialog from "../dialogs/approvalDialog"
 export default {
   name: "ToApproval",
-  components: {},
+  components: {
+    approvalDialog
+  },
   props: {},
   data() {
     return {
@@ -79,7 +83,11 @@ export default {
   },
   watch: {},
   computed: {},
-  methods: {},
+  methods: {
+    approval(){
+      this.$refs.approval.dialogVisible = true;
+    }
+  },
   mounted() {},
 };
 </script>

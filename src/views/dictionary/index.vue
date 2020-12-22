@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  name: "",
+  name: "Dictionary",
   components: {},
   props: {},
   data() {
