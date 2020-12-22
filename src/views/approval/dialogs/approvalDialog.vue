@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 待审核下的操作弹窗 -->
     <el-dialog
       :visible.sync="dialogVisible"
       width="30%"
@@ -170,14 +171,5 @@ export default {
   background: #eeeeee;
   margin: 4px;
 }
-.line {
-  &::after {
-    display: block;
-    content: "";
-    width: 100%;
-    height: 1px;
-    background: #eee;
-    margin: 8px 0;
-  }
-}
+
 </style>
