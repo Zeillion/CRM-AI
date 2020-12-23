@@ -16,18 +16,20 @@
 
       <el-table-column label="操作" width="120">
         <template slot-scope="{ row }">
-          <el-button size="small" type="text">操作记录</el-button>
+          <el-button size="small" type="text" @click="showRecord">操作记录</el-button>
           <el-button size="small" type="text">详情</el-button>
         </template>
       </el-table-column>
     </el-table>
+    <record-dialog ref="record"></record-dialog>
   </div>
 </template>
 
 <script>
+import RecordDialog from '../dialogs/recordDialog.vue';
 export default {
   name: "HasEffected",
-  components: {},
+  components: {RecordDialog},
   props: {},
   data() {
     return {
@@ -54,7 +56,11 @@ export default {
   },
   watch: {},
   computed: {},
-  methods: {},
+  methods: {
+    showRecord(){
+      this.$refs.record.dialogVisible = true;
+    }
+  },
   mounted() {},
 };
 </script>
