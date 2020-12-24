@@ -309,7 +309,7 @@
             </el-form-item>
             <div class="line"></div>
             <el-form-item label="AI ID">
-               <el-input
+              <el-input
                 v-model="form.AI"
                 placeholder="支持多个输入，逗号间隔"
                 size="small"
@@ -351,7 +351,7 @@ export default {
         duration: "",
         unit: "",
         date: "",
-        AI:""
+        AI: "",
       },
     };
   },
@@ -360,6 +360,26 @@ export default {
   methods: {
     handleClose() {
       this.dialogVisible = false;
+    },
+    confirm() {
+      this.$confirm(`是否确认完成建模，产品为可识别状态？`, "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "操作成功!",
+          });
+          this.handleClose();
+        })
+        .catch(() => {
+          //   this.$message({
+          //     type: 'info',
+          //     message: '已取消删除'
+          //   });
+        });
     },
   },
   mounted() {},

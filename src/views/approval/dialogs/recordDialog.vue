@@ -17,10 +17,8 @@
         <el-table-column prop="name" label="操作人"> </el-table-column>
       </el-table>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleClose" size="small">驳回</el-button>
-        <el-button type="primary" @click="handlePass" size="small">
-          通过</el-button
-        >
+        <el-button @click="handleClose" size="small">关闭</el-button>
+        
       </span>
     </el-dialog>
   </div>

@@ -151,7 +151,7 @@ export default {
         .then(() => {
           this.$message({
             type: "success",
-            message: "删除成功!",
+            message: "操作成功!",
           });
         })
         .catch(() => {
