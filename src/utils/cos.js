@@ -119,7 +119,7 @@ class _Cos {
 
   /**
    * 封装批量上传文件
-   * @param arr Array
+   * @param arr Array 文件数组
    * @param fileName string
    * @returns {Promise}
    */

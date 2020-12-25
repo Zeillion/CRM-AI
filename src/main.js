@@ -10,7 +10,7 @@ import '@/styles/index.scss' // global css
 import App from './App'
 import store from './store'
 import router from './router'
-
+import Pagination from './components/Pagination'
 import '@/icons' // icon
 import '@/permission' // permission control
 
@@ -29,6 +29,7 @@ if (process.env.NODE_ENV === 'production') {
 
 Vue.use(ElementUI)
 Vue.config.productionTip = false
+Vue.component("Pagination", Pagination);
 
 new Vue({
   el: '#app',

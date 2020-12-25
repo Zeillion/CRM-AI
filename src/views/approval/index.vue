@@ -42,7 +42,7 @@
       </el-form>
     </div>
     <!-- 下方表格 -->
-    <el-tabs  @tab-click="handleTab" v-model="activeTab" type="card">
+    <el-tabs @tab-click="handleTab" v-model="activeTab" type="card">
       <el-tab-pane
         v-for="(item, index) in tabList"
         :label="item.label"
@@ -52,6 +52,13 @@
         <component :is="componentName"></component>
       </el-tab-pane>
     </el-tabs>
+    <Pagination
+      v-show="total > 9"
+      :total="total"
+      :limit.sync="pageSize"
+      :page.sync="pageNumber"
+      @pagination="getData"
+    />
   </div>
 </template>
 
@@ -70,7 +77,7 @@ export default {
     ToApproval,
     ToConfirm,
     ToFile,
-    ToModel
+    ToModel,
   },
   computed: {
     ...mapGetters(["name"]),
@@ -78,7 +85,10 @@ export default {
   data() {
     return {
       componentName: "HasEffected",
-      activeTab:"0",
+      activeTab: "0",
+      pageSize:10,
+      pageNumber:1,
+      total:0,
       form: {
         keyword: "",
         type: "",
@@ -111,6 +121,7 @@ export default {
   },
   methods: {
     handleTab(data, e) {
+      this.pageNumber = 1;
       let str = data.name;
       switch (str) {
         case "0":
@@ -130,6 +141,9 @@ export default {
           break;
       }
     },
+    initPage(){
+      this.pageNumber = 1;
+    }
   },
 };
 </script>

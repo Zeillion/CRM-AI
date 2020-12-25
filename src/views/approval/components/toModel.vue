@@ -1,7 +1,17 @@
 <template>
   <!-- 待建模 -->
   <div>
-    <el-table :data="tableData" stripe style="width: 100%">
+    <el-table
+      :data="tableData"
+      stripe
+      style="width: 100%"
+      :header-cell-style="{
+        background: '#EBEDF3',
+        color: '#444',
+        'font-size': '14px',
+      }"
+      :cell-style="cellStyle"
+    >
       <el-table-column prop="img" label="24位图" fixed="left">
       </el-table-column>
       <el-table-column prop="product" label="商品全称" fixed="left" width="120">
@@ -33,6 +43,11 @@ export default {
   props: {},
   data() {
     return {
+      cellStyle: {
+        "border-right": "1px solid #E4E4E4",
+        "font-size": "12px",
+        "color":"#000"
+      },
       tableData: [
         {
           img: "",

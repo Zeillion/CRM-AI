@@ -1,7 +1,17 @@
 <template>
   <!-- 待确认 -->
   <div>
-    <el-table :data="tableData" stripe style="width: 100%">
+    <el-table
+      :data="tableData"
+      stripe
+      style="width: 100%"
+      :header-cell-style="{
+        background: '#EBEDF3',
+        color: '#444',
+        'font-size': '14px',
+      }"
+      :cell-style="cellStyle"
+    >
       <el-table-column prop="img" label="24位图" fixed="left">
       </el-table-column>
       <el-table-column
@@ -23,7 +33,9 @@
 
       <el-table-column label="操作" width="120">
         <template slot-scope="{ row }">
-          <el-button size="small" type="text" @click="showDetail">详情</el-button>
+          <el-button size="small" type="text" @click="showDetail"
+            >详情</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -32,15 +44,20 @@
 </template>
 
 <script>
-import confirmDetail from "../dialogs/confirmDetail"
+import confirmDetail from "../dialogs/confirmDetail";
 export default {
   name: "toConfirm",
   components: {
-    confirmDetail
+    confirmDetail,
   },
   props: {},
   data() {
     return {
+      cellStyle: {
+        "border-right": "1px solid #E4E4E4",
+        "font-size": "12px",
+        "color":"#000"
+      },
       tableData: [
         {
           img: "",
@@ -59,15 +76,15 @@ export default {
           phone: 18082823838,
           time: "2020-12-12 19:00:00",
         },
-      ]
+      ],
     };
   },
   watch: {},
   computed: {},
   methods: {
-    showDetail(){
+    showDetail() {
       this.$refs.detail.dialogVisible = true;
-    }
+    },
   },
   mounted() {},
 };
