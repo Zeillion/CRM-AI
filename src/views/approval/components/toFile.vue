@@ -14,18 +14,20 @@
       <el-table-column prop="status" label="状态"> </el-table-column>
       <el-table-column label="操作" width="120">
         <template slot-scope="{ row }">
-          <el-button size="small" type="text">建档</el-button>
+          <el-button size="small" type="text" @click="toFile">建档</el-button>
           <el-button size="small" type="text">详情</el-button>
         </template>
       </el-table-column>
     </el-table>
+    <file-dialog ref="file"></file-dialog>
   </div>
 </template>
 
 <script>
+import FileDialog from '../dialogs/fileDialog.vue';
 export default {
   name:'',
-  components: {},
+  components: {FileDialog},
   props: {},
   data() {
     return {
@@ -55,7 +57,11 @@ export default {
   },
   watch: {},
   computed: {},
-  methods: {},
+  methods: {
+    toFile(){
+      this.$refs.file.dialogVisible = true;
+    }
+  },
   mounted() {}
 };
 </script>

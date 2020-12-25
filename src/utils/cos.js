@@ -1,8 +1,9 @@
 import COS from "cos-js-sdk-v5"
+import { cosAuth } from "@/api/cosAuth"
 // 初始化数据
 const defaultData = {
-  SecretId: "AKIDiBMM4UqWz96lF4OsrZzBbjCNL1UgGGck",
-  SecretKey: "zt8QQ9gw1ye4E7lCqIdiaATYS5WnnWyC",
+  // SecretId: "AKIDiBMM4UqWz96lF4OsrZzBbjCNL1UgGGck",
+  // SecretKey: "zt8QQ9gw1ye4E7lCqIdiaATYS5WnnWyC",
   Bucket: process.env.NODE_ENV == "production" ? 'xuehua-mp-mps-prod-1259627966' : 'xuehua-mp-mps-dev-1259627966', /* 必须 */
   Region: "ap-shanghai",
 };
@@ -12,15 +13,32 @@ let getDate = `${new Date().getFullYear()}-${new Date().getMonth() +
 // 规则为  创建人-类型-创建时间
 
 // 还有跨域问题，需要解决问题才能使用
+
+
 class _Cos {
-  constructor(options) {
+  constructor() {
     this._cos = new COS({
-      SecretId: options ? options.SecretId : defaultData.SecretId,
-      SecretKey: options ? options.SecretId : defaultData.SecretKey,
+      // SecretId: options ? options.SecretId : defaultData.SecretId,
+      // SecretKey: options ? options.SecretId : defaultData.SecretKey,
+      getAuthorization: function (options, callback) {
+        cosAuth().then(res => {
+          var credentials = res && res.credentials;
+          if (!res || !credentials) return console.error('credentials invalid');
+          callback({
+            TmpSecretId: credentials.tmpSecretId,
+            TmpSecretKey: credentials.tmpSecretKey,
+            XCosSecurityToken: credentials.sessionToken,
+            // 建议返回服务器时间作为签名的开始时间，避免用户浏览器本地时间偏差过大导致签名错误
+            StartTime: res.startTime, // 时间戳，单位秒，如：1580000000
+            ExpiredTime: res.expiredTime, // 时间戳，单位秒，如：1580000900
+          });
+
+        })
+      }
     });
     this.config = {
-      Bucket: options ? options.Bucket : defaultData.Bucket,
-      Region: options ? options.Region : defaultData.Region,
+      Bucket: defaultData.Bucket,
+      Region: defaultData.Region,
     };
   }
 
@@ -105,7 +123,7 @@ class _Cos {
    * @param fileName string
    * @returns {Promise}
    */
-  uploadFiles(arr,fileName) {
+  uploadFiles(arr, fileName) {
     const _this = this;
     arr.map(t => {
       return {

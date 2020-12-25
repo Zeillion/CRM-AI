@@ -22,3 +22,10 @@ export function logout() {
     method: 'post'
   })
 }
+
+export function cosAuth(){
+  return request({
+    url:'/cosAuth',
+    method:"post"
+  })
+}

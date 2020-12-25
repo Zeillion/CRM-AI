@@ -4,7 +4,7 @@
     <el-dialog
       :visible.sync="dialogVisible"
       width="30%"
-      :before-close="handleClose"
+      :before-close="closeModel"
       :close-on-click-modal="false"
     >
       <div class="title line">
@@ -133,6 +133,9 @@ export default {
   watch: {},
   computed: {},
   methods: {
+    closeModel() {
+      this.dialogVisible = false;
+    },
     handleClose() {
       this.dialogVisible = false;
       this.$refs.reject.dialogVisible = true;
@@ -171,5 +174,4 @@ export default {
   background: #eeeeee;
   margin: 4px;
 }
-
 </style>
