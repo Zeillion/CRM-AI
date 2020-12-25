@@ -42,7 +42,7 @@
       </el-form>
     </div>
     <!-- 下方表格 -->
-    <el-tabs type="border-card" @tab-click="handleTab">
+    <el-tabs  @tab-click="handleTab" v-model="activeTab" type="card">
       <el-tab-pane
         v-for="(item, index) in tabList"
         :label="item.label"
@@ -78,6 +78,7 @@ export default {
   data() {
     return {
       componentName: "HasEffected",
+      activeTab:"0",
       form: {
         keyword: "",
         type: "",
@@ -87,23 +88,23 @@ export default {
       tabList: [
         {
           label: "已生效sku",
-          value: 0,
+          value: "0",
         },
         {
           label: "待审批sku",
-          value: 1,
+          value: "1",
         },
         {
           label: "待建档",
-          value: 2,
+          value: "2",
         },
         {
           label: "待确认",
-          value: 3,
+          value: "3",
         },
         {
           label: "待建模",
-          value: 4,
+          value: "4",
         },
       ],
     };
@@ -112,19 +113,19 @@ export default {
     handleTab(data, e) {
       let str = data.name;
       switch (str) {
-        case 0:
+        case "0":
           this.componentName = "HasEffected";
           break;
-        case 1:
+        case "1":
           this.componentName = "ToApproval";
           break;
-        case 2:
+        case "2":
           this.componentName = "ToFile";
           break;
-        case 3:
+        case "3":
           this.componentName = "ToConfirm";
           break;
-        case 4:
+        case "4":
           this.componentName = "ToModel";
           break;
       }

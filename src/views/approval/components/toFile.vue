@@ -14,8 +14,8 @@
       <el-table-column prop="status" label="状态"> </el-table-column>
       <el-table-column label="操作" width="120">
         <template slot-scope="{ row }">
-          <el-button size="small" type="text" @click="toFile">建档</el-button>
-          <el-button size="small" type="text">详情</el-button>
+          <el-button size="small" type="text" @click="toFile" v-if="!row.hasFiled">建档</el-button>
+          <el-button size="small" type="text" v-else>修改</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -32,6 +32,27 @@ export default {
   data() {
     return {
        tableData: [
+          {
+          img: "",
+          name:"脸谱300ml",
+          product: "雪花-脸谱300ml",
+          barCode: 692319381,
+          judger:"李四",
+          packageCode: "11",
+          type:"POSM",
+          isSelf:"本品",
+          brand:"雪花",
+          AIID:"122331",
+          status:"新申请",
+          packageType:"瓶装",
+          time:"2020-09-22",
+          name: "脸谱300ml",
+          reporter: "张三",
+          phone: 18082823838,
+          date: "2020-12-12 19:00",
+          concat:18923242342,
+          hasFiled:false
+        },
         {
           img: "",
           name:"脸谱300ml",
@@ -50,7 +71,8 @@ export default {
           reporter: "张三",
           phone: 18082823838,
           date: "2020-12-12 19:00",
-          concat:18923242342
+          concat:18923242342,
+          hasFiled:true
         },
       ],
     };
