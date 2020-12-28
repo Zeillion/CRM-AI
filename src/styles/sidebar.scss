@@ -1,10 +1,11 @@
 #app {
 
   .main-container {
-    min-height: 100%;
+    // min-height: 100%;
     transition: margin-left .28s;
     margin-left: $sideBarWidth;
     position: relative;
+    overflow: hidden;
   }
 
   .sidebar-container {
@@ -20,6 +21,7 @@
     z-index: 1001;
     overflow: hidden;
     padding-top:27px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.11);
 
     // reset element-ui css
     .horizontal-collapse-transition {
@@ -67,6 +69,7 @@
       border: none;
       height: 100%;
       width: 100% !important;
+      // leena 2020 12-28
       .is-active{
         background-color: #F6FAFF!important;
         display: flex;

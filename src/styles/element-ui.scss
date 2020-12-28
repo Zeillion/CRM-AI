@@ -51,15 +51,15 @@
 
 
 // cover table
-.el-tabs__item.is-active{
-  background-color: #FBF8FF;
-  color:#000;
-  border-top:3px solid #034193;
-  border-bottom: none!important;
-}
+// .el-tabs__item.is-active{
+//   background-color: #FBF8FF;
+//   color:#000;
+//   border-top:3px solid #034193;
+//   border-bottom: none!important;
+// }
 
 tbody .el-table_1_column_1 {
-  border-left:1px solid #E4E4E4;
+  border-left:1px solid #E4E4E4!important;
   
 }
 

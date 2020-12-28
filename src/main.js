@@ -30,6 +30,8 @@ if (process.env.NODE_ENV === 'production') {
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 Vue.component("Pagination", Pagination);
+import Sticky from "@/components/Sticky";
+Vue.component("Sticky", Sticky);
 
 new Vue({
   el: '#app',

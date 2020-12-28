@@ -2,8 +2,8 @@
   <div class="navbar">
     <!-- <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" /> -->
 
-    <breadcrumb class="breadcrumb-container" />
-
+    <!-- <breadcrumb class="breadcrumb-container" /> -->
+    <img src="@/assets/images/logo.png" alt="">
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -61,10 +61,16 @@ export default {
 
 <style lang="scss" scoped>
 .navbar {
-  height: 50px;
+  width:100%;
+  height: 80px;
   overflow: hidden;
-  position: relative;
-  background: #fff;
+  // position: relative;
+  position: fixed;
+  left:0;
+  right:0;
+  top:0;
+  z-index: 99;
+  background: #034193;
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
 
   .hamburger-container {
