@@ -14,11 +14,12 @@
     height: 100%;
     position: fixed;
     font-size: 0px;
-    top: 0;
+    top: 80px;
     bottom: 0;
     left: 0;
     z-index: 1001;
     overflow: hidden;
+    padding-top:27px;
 
     // reset element-ui css
     .horizontal-collapse-transition {
@@ -66,6 +67,21 @@
       border: none;
       height: 100%;
       width: 100% !important;
+      .is-active{
+        background-color: #F6FAFF!important;
+        display: flex;
+        align-items: center;
+        &::before{
+          display: inline-block;
+          content: "";
+          width:5px;
+          height:100%;
+          background: #034193;
+          border-radius: 3px;
+          margin-left:-20px;
+          margin-right:14px;
+        }
+      }
     }
 
     // menu hover

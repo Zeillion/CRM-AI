@@ -1,6 +1,6 @@
 <template>
   <div :class="classObj" class="app-wrapper">
-    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
+    <div class="top_title">雪花</div>
     <sidebar class="sidebar-container" />
     <div class="main-container">
       <div :class="{'fixed-header':fixedHeader}">
@@ -89,5 +89,12 @@ export default {
 
   .mobile .fixed-header {
     width: 100%;
+  }
+  .top_title{
+    width:100%;
+    background-color: #034193;
+    height:80px;
+    color:#fff;
+    font-size: 32px;
   }
 </style>
