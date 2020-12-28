@@ -52,17 +52,6 @@
         <component :is="componentName"></component>
       </el-tab-pane>
     </el-tabs>
-
-     <el-tabs @tab-click="handleTab" v-model="activeTab" type="card">
-      <el-tab-pane
-        v-for="(item, index) in tabList"
-        :label="item.label"
-        :name="item.value"
-        :key="index"
-      >
-        <component :is="componentName"></component>
-      </el-tab-pane>
-    </el-tabs>
     <Pagination
       v-show="total > 9"
       :total="total"

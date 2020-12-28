@@ -3,8 +3,11 @@
     <!-- <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" /> -->
 
     <!-- <breadcrumb class="breadcrumb-container" /> -->
-    <img src="@/assets/images/logo.png" alt="">
-    <div class="right-menu">
+    <div class="flex"> 
+       <img src="@/assets/images/logo.png">
+    </div>
+   
+    <!-- <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
@@ -27,7 +30,7 @@
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -72,7 +75,9 @@ export default {
   z-index: 99;
   background: #034193;
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
-
+  display:flex;
+  align-items: center;
+  padding-left:30px;
   .hamburger-container {
     line-height: 46px;
     height: 100%;
