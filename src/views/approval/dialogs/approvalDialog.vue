@@ -173,5 +173,7 @@ export default {
   padding: 5px;
   background: #eeeeee;
   margin: 4px;
+  width:160px;
+  height:160px;
 }
 </style>

@@ -340,14 +340,15 @@
 </template>
 
 <script>
+import { handleTab } from "@/minxin/tab";
 export default {
   name: "FileDialog",
   components: {},
+  mixins: [handleTab],
   props: {},
   data() {
     return {
       dialogVisible: false,
-      activeName: 0,
       collapseName: "1",
       img: require("../../../assets/images/beer.jpeg"),
       form: {
@@ -399,10 +400,6 @@ export default {
           //     message: '已取消删除'
           //   });
         });
-    },
-    // 切换tab
-    changeTab(data) {
-      this.activeName = data;
     },
   },
   mounted() {},
