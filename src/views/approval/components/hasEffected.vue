@@ -36,27 +36,30 @@
           <el-button size="small" type="text" @click="showRecord"
             >操作记录</el-button
           >
-          <el-button size="small" type="text">详情</el-button>
+          <el-button size="small" type="text" @click="showDetail"
+            >详情</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
     <record-dialog ref="record"></record-dialog>
-   
+    <detail-dialog ref="detail"></detail-dialog>
   </div>
 </template>
 
 <script>
+import DetailDialog from "../dialogs/detailDialog.vue";
 import RecordDialog from "../dialogs/recordDialog.vue";
 export default {
   name: "HasEffected",
-  components: { RecordDialog },
+  components: { RecordDialog, DetailDialog },
   props: {},
   data() {
     return {
       cellStyle: {
         "border-right": "1px solid #E4E4E4",
         "font-size": "12px",
-        "color":"#000"
+        color: "#000",
       },
       tableData: [
         {
@@ -170,7 +173,11 @@ export default {
     showRecord() {
       this.$refs.record.dialogVisible = true;
     },
-    getData(){}
+    getData() {},
+    // 点击详情
+    showDetail() {
+      this.$refs.detail.dialogVisible = true;
+    },
   },
   mounted() {},
 };
