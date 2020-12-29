@@ -13,16 +13,37 @@
               size="small"
             />
           </el-form-item>
-          <el-form-item>
+          <div class="flex">
+            <el-form-item>
+              <el-button
+                type="primary"
+                @click="onSubmit"
+                size="small"
+                class="btn"
+                icon="el-icon-search"
+                >搜索</el-button
+              >
+            </el-form-item>
+          </div>
+
+          <div v-if="activeTab == 3">
+            <el-button
+              type="primary"
+              @click="addSku"
+              size="small"
+              class="btn"
+              >新增sku</el-button
+            >
+          </div>
+            <div v-if="activeTab == 0">
             <el-button
               type="primary"
               @click="onSubmit"
               size="small"
               class="btn"
-              icon="el-icon-search"
-              >搜索</el-button
+              >新增建档sku</el-button
             >
-          </el-form-item>
+          </div>
         </div>
         <!-- 下拉选项组 -->
         <div class="flex_container">
@@ -72,6 +93,8 @@
       :page.sync="pageNumber"
       @pagination="getData"
     />
+
+    <add-sku ref="add"></add-sku>
   </div>
 </template>
 
@@ -82,6 +105,7 @@ import ToApproval from "./components/toApproval";
 import ToConfirm from "./components/toConfirm";
 import ToFile from "./components/toFile";
 import ToModel from "./components/toModel";
+import AddSku from './dialogs/addSku.vue';
 
 export default {
   name: "Approval",
@@ -91,6 +115,7 @@ export default {
     ToConfirm,
     ToFile,
     ToModel,
+    AddSku
   },
   computed: {
     ...mapGetters(["name"]),
@@ -157,6 +182,10 @@ export default {
     initPage() {
       this.pageNumber = 1;
     },
+    // 新增sku
+    addSku(){
+      this.$refs.add.dialogVisible = true;
+    }
   },
 };
 </script>

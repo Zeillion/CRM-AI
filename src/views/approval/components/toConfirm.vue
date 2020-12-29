@@ -86,6 +86,8 @@ export default {
     showDetail() {
       this.$refs.detail.dialogVisible = true;
     },
+    // 新增sku
+    
   },
   mounted() {},
 };

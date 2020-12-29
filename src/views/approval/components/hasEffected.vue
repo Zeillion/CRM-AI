@@ -37,7 +37,9 @@
             >操作记录</el-button
           >
           <el-button size="small" type="text" @click="showDetail"
-            >详情</el-button
+            >
+            <span style="color:#FE934F">详情</span>
+            </el-button
           >
         </template>
       </el-table-column>
