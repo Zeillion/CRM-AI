@@ -1,44 +1,64 @@
 <template>
   <div class="wrapper">
     <!-- 商品档案清单 -->
+     <!-- 搜索栏 -->
     <div class="search_box">
-      <el-form
-        ref="form"
-        :model="form"
-        label-width="20px"
-        class="flex_container"
-      >
-        <el-form-item>
-          <el-input
-            v-model="form.name"
-            placeholder="条形码/商品全称"
-            size="small"
-          />
-        </el-form-item>
-
-        <el-form-item>
-          <el-select v-model="form.type" placeholder="商品类型" size="small">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-select v-model="form.brand" placeholder="商品品牌" size="small">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-select v-model="form.package" placeholder="包装形式" size="small">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit" size="small" class="btn"
-            >搜索</el-button
-          >
-        </el-form-item>
+      <el-form ref="form" :model="form" label-width="0px">
+        <!-- 搜索按钮组 -->
+        <div class="flex_container">
+          <el-form-item>
+            <el-input
+              v-model="form.name"
+              placeholder="条形码/商品全称"
+              size="small"
+            />
+          </el-form-item>
+          <el-form-item>
+            <el-button
+              type="primary"
+              @click="onSubmit"
+              size="small"
+              class="btn"
+              icon="el-icon-search"
+              >搜索</el-button
+            >
+          </el-form-item>
+        </div>
+        <!-- 下拉选项组 -->
+        <div class="flex_container">
+          <el-form-item class="flex_item">
+            <el-select v-model="form.type" placeholder="商品类型" size="small">
+              <el-option label="区域一" value="shanghai"></el-option>
+              <el-option label="区域二" value="beijing"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item class="flex_item">
+            <el-select v-model="form.brand" placeholder="商品品牌" size="small">
+              <el-option label="区域一" value="shanghai"></el-option>
+              <el-option label="区域二" value="beijing"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item class="flex_item">
+            <el-select
+              v-model="form.package"
+              placeholder="包装形式"
+              size="small"
+            >
+              <el-option label="区域一" value="shanghai"></el-option>
+              <el-option label="区域二" value="beijing"></el-option>
+            </el-select>
+          </el-form-item>
+           <el-form-item class="flex_item">
+            <el-select
+              v-model="form.reflex"
+              placeholder="包装形式"
+              size="small"
+            >
+              <el-option label="区域一" value="shanghai"></el-option>
+              <el-option label="区域二" value="beijing"></el-option>
+            </el-select>
+          </el-form-item>
+        </div>
       </el-form>
     </div>
 
@@ -91,6 +111,7 @@ export default {
         type: "",
         brand: "",
         package: "",
+        reflex:""
       },
        tableData: [
         {

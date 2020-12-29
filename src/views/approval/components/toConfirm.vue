@@ -34,7 +34,7 @@
       <el-table-column label="操作" width="120">
         <template slot-scope="{ row }">
           <el-button size="small" type="text" @click="showDetail"
-            >详情</el-button
+            >审批</el-button
           >
         </template>
       </el-table-column>
@@ -82,6 +82,7 @@ export default {
   watch: {},
   computed: {},
   methods: {
+    // 审批
     showDetail() {
       this.$refs.detail.dialogVisible = true;
     },
