@@ -418,10 +418,13 @@ export default {
   computed: {},
   methods: {
     handleReject() {
-      this.dialogVisible = false;
+      this.handleClose();
       this.$refs.reject.dialogVisible = true;
       this.$refs.reject.target = this.target;
       this.$refs.reject.status = 3;
+    },
+    handleClose(){
+      this.dialogVisible = false;
     },
 
     // 保存并通过
@@ -439,6 +442,7 @@ export default {
           type: "success",
           message: "操作成功!",
         });
+        this.handleClose();
       });
     },
   },

@@ -6,6 +6,7 @@
       :visible.sync="dialogVisible"
       width="450px"
       :before-close="handleClose"
+      :close-on-click-modal="false"
       append-to-body
       :show-close="false"
     >
@@ -107,6 +108,9 @@ export default {
       this.dialogVisible = false;
   
     },
+    confirm(){
+      this.handleClose();
+    }
   },
   mounted() {},
 };
