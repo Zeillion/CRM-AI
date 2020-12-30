@@ -373,28 +373,31 @@
         </el-form>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleClose" size="small" type="info"
+        <el-button @click="handleReject" size="small" type="info"
           >驳回</el-button
         >
         <el-button type="primary" @click="confirm" size="small"
-          >保存并提交</el-button
+          >保存并通过</el-button
         >
         <el-button plain @click="handleClose" size="small">关闭</el-button>
       </span>
     </el-dialog>
+    <reject-dialog ref="reject"></reject-dialog>
   </div>
 </template>
 
 <script>
 import { handleTab } from "@/minxin/tab";
+import rejectDialog from "./rejectDialog";
 export default {
   name: "confirmDetail",
-  components: {},
+  components: { rejectDialog },
   mixins: [handleTab],
   props: {},
   data() {
     return {
       dialogVisible: false,
+      target: "雪花300",
       img: require("../../../assets/images/beer.jpeg"),
       form: {
         one: "",
@@ -414,10 +417,30 @@ export default {
   watch: {},
   computed: {},
   methods: {
-    handleClose() {
+    handleReject() {
       this.dialogVisible = false;
+      this.$refs.reject.dialogVisible = true;
+      this.$refs.reject.target = this.target;
+      this.$refs.reject.status = 3;
     },
-    confirm() {},
+
+    // 保存并通过
+    confirm() {
+      this.$confirm(
+        `是否确定【${this.target}】的建档申请？确认后该商品将进入建模步骤`,
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        }
+      ).then(() => {
+        this.$message({
+          type: "success",
+          message: "操作成功!",
+        });
+      });
+    },
   },
   mounted() {},
 };

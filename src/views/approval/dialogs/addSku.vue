@@ -142,5 +142,6 @@ export default {
 }
 .middle {
   margin-bottom: 10px;
+  font-size: 16px;
 }
 </style>
