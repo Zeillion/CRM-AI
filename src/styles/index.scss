@@ -107,6 +107,7 @@ div:focus {
   margin:30px;
   background-color: #fff;
   padding:30px;
+  min-height:calc(100vh-80px)!important;
 }
 
 // 搜索栏样式
@@ -159,4 +160,8 @@ div:focus {
 .big_title{
   color:#1F2D3D;
   font-size: 18px;
+}
+
+.red_text{
+  color:#FF737E;
 }
