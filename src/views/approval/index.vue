@@ -27,20 +27,12 @@
           </div>
 
           <div v-if="activeTab == 3">
-            <el-button
-              type="primary"
-              @click="addSku"
-              size="small"
-              class="btn"
+            <el-button type="primary" @click="addSku" size="small" class="btn"
               >新增sku</el-button
             >
           </div>
-            <div v-if="activeTab == 0">
-            <el-button
-              type="primary"
-              @click="onSubmit"
-              size="small"
-              class="btn"
+          <div v-if="activeTab == 0">
+            <el-button type="primary" @click="addFile" size="small" class="btn"
               >新增建档sku</el-button
             >
           </div>
@@ -95,6 +87,7 @@
     />
 
     <add-sku ref="add"></add-sku>
+    <add-file ref="addFile"></add-file>
   </div>
 </template>
 
@@ -105,7 +98,8 @@ import ToApproval from "./components/toApproval";
 import ToConfirm from "./components/toConfirm";
 import ToFile from "./components/toFile";
 import ToModel from "./components/toModel";
-import AddSku from './dialogs/addSku.vue';
+import AddSku from "./dialogs/addSku";
+import AddFile from "./dialogs/addFile";
 
 export default {
   name: "Approval",
@@ -115,7 +109,8 @@ export default {
     ToConfirm,
     ToFile,
     ToModel,
-    AddSku
+    AddSku,
+    AddFile,
   },
   computed: {
     ...mapGetters(["name"]),
@@ -183,9 +178,13 @@ export default {
       this.pageNumber = 1;
     },
     // 新增sku
-    addSku(){
+    addSku() {
       this.$refs.add.dialogVisible = true;
-    }
+    },
+    // 新增建档sku
+    addFile() {
+      this.$refs.addFile.dialogVisible = true;
+    },
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <!--  待确认下的详情弹窗-->
+  <!--  新增建党sku-->
   <div>
     <el-dialog
       :visible.sync="dialogVisible"
@@ -10,24 +10,15 @@
     >
       <!--建档数据 -->
       <div>
-        <!-- 状态-->
-        <div class="flex_wrapper top">
-          <div>
-            <div>
-              <span class="bold" style="color: #1f2d3d">状态：</span>
-              <span class="red_text"> 待建档-新申请/被驳回</span>
-            </div>
-            <div class="red_text">原因：商品全称字段填写有误</div>
-          </div>
-          <div class="gray_text">申请时间：2020-12-12 14:00:00</div>
-        </div>
-        <div class="line"></div>
-
+        <div class="title flex_vertical">建档数据</div>
         <!-- 图片 -->
-        <div class="middle">
+        <div class="middle flex_wrapper">
           <div class="bold" style="color: #222; line-height: 27px">
             商品图片：
           </div>
+          <div>
+              <el-button plain size="small" @click="upload">一键上传</el-button>
+            </div>
         </div>
         <div class="img_block">
           <!-- img_box -->
@@ -276,13 +267,11 @@
         </el-form>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleReject" size="small" type="info"
-          >驳回</el-button
-        >
+        <el-button plain @click="handleClose" size="small">取消</el-button>
         <el-button type="primary" @click="confirm" size="small"
-          >保存并通过</el-button
+          >保存</el-button
         >
-        <el-button plain @click="handleClose" size="small">关闭</el-button>
+        
       </span>
     </el-dialog>
     <reject-dialog ref="reject"></reject-dialog>
@@ -353,9 +342,20 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.title {
+  background-color: #eff2f7;
+  width: 820px;
+  height: 44px;
+  color: #222222;
+  justify-content: center;
+  font-weight: bold;
+  margin-top: -60px;
+  margin-left: -20px;
+}
 .middle {
   font-size: 16px;
   margin-bottom: 8px;
+  margin-top:10px;
 }
 .img_block {
   margin-top: 20px;
