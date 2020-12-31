@@ -112,9 +112,12 @@
       </div>
       <reject-dialog ref="reject"></reject-dialog>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleClose" size="small">驳回</el-button>
+        <el-button @click="handleClose" size="small" type="info">驳回</el-button>
         <el-button type="primary" @click="handlePass" size="small">
           通过</el-button
+        >
+         <el-button plain @click="dialogVisible = false" size="small">
+          关闭</el-button
         >
       </span>
     </el-dialog>

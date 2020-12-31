@@ -27,26 +27,30 @@
           <el-button size="small" type="text" @click="toModel"
             >完成建模</el-button
           >
-          <el-button size="small" type="text">详情</el-button>
+          <el-button size="small" type="text" @click="showDetail"
+            >详情</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
     <model-dialog ref="model"></model-dialog>
+    <detail-dialog ref="detail"></detail-dialog>
   </div>
 </template>
 
 <script>
-import ModelDialog from "../dialogs/modelDialog.vue";
+import DetailDialog from "../dialogs/detailDialog";
+import ModelDialog from "../dialogs/modelDialog";
 export default {
   name: "ToModel",
-  components: { ModelDialog },
+  components: { ModelDialog, DetailDialog },
   props: {},
   data() {
     return {
       cellStyle: {
         "border-right": "1px solid #E4E4E4",
         "font-size": "12px",
-        "color":"#000"
+        color: "#000",
       },
       tableData: [
         {
@@ -73,6 +77,10 @@ export default {
   methods: {
     toModel() {
       this.$refs.model.dialogVisible = true;
+    },
+    // 点击详情
+    showDetail() {
+      this.$refs.detail.dialogVisible = true;
     },
   },
   mounted() {},

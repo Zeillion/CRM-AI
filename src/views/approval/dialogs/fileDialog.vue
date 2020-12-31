@@ -325,57 +325,6 @@
             </div>
 
             <div class="line"></div>
-            <div class="form" style="margin-top: 20px">
-              <el-form-item label="外包装形式" class="item">
-                <el-select
-                  v-model="form.duration"
-                  placeholder="请选择外包装形式"
-                  size="small"
-                >
-                  <el-option label="区域一" value="shanghai"></el-option>
-                  <el-option label="区域二" value="beijing"></el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="产品特征" class="item">
-                <el-select
-                  v-model="form.duration"
-                  placeholder="请选择产品特征"
-                  size="small"
-                >
-                  <el-option label="区域一" value="shanghai"></el-option>
-                  <el-option label="区域二" value="beijing"></el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="产品档次" class="item">
-                <el-select
-                  v-model="form.duration"
-                  placeholder="请选择产品档次"
-                  size="small"
-                >
-                  <el-option label="区域一" value="shanghai"></el-option>
-                  <el-option label="区域二" value="beijing"></el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="产品上市时间" class="item">
-                <el-date-picker
-                  v-model="form.date"
-                  type="date"
-                  placeholder="选择日期"
-                  size="small"
-                >
-                </el-date-picker>
-              </el-form-item>
-              <el-form-item label="产品工艺" class="item">
-                <el-select
-                  v-model="form.duration"
-                  placeholder="请选择产品工艺"
-                  size="small"
-                >
-                  <el-option label="区域一" value="shanghai"></el-option>
-                  <el-option label="区域二" value="beijing"></el-option>
-                </el-select>
-              </el-form-item>
-            </div>
           </el-form>
         </div>
         <span slot="footer" class="dialog-footer">
@@ -481,8 +430,12 @@ export default {
     upload() {
       this.uploadShow = true;
     },
-    closeUpload(){},
-    submitUpload(){}
+    closeUpload(){
+      this.uploadShow = false;
+    },
+    submitUpload(){
+      this.uploadShow = false;
+    }
   },
   mounted() {},
 };
