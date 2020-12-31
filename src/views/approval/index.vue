@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="bold">审批新增sku</div>
+    <div class="bold big_title">审批新增sku</div>
     <!-- 搜索栏 -->
     <div class="search_box">
       <el-form ref="form" :model="form" label-width="0px">
