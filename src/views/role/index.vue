@@ -43,22 +43,20 @@
       <el-table-column prop="creater" label="创建人"> </el-table-column>
       <el-table-column label="操作" width="220">
         <template slot-scope="{ row }">
-          <el-button size="mini" plain @click="removeRole"
-            >删除角色</el-button
-          >
-          <el-button size="mini" plain @click="bind">
-            绑定菜单权限
-          </el-button>
+          <el-button size="mini" plain @click="removeRole">删除角色</el-button>
+          <el-button size="mini" plain @click="bind"> 绑定菜单权限 </el-button>
         </template>
       </el-table-column>
     </el-table>
+    <add-role ref="addRole"></add-role>
   </div>
 </template>
 
 <script>
+import AddRole from "./dialogs/addRole.vue";
 export default {
   name: "",
-  components: {},
+  components: { AddRole },
   props: {},
   data() {
     return {
@@ -100,10 +98,11 @@ export default {
   computed: {},
   methods: {
     goSearch() {},
-    addRole() {},
+    addRole() {
+        this.$refs.addRole.dialogVisible = true;
+    },
     // 删除角色
-    removeRole(){},
-    
+    removeRole() {},
   },
   mounted() {},
 };
