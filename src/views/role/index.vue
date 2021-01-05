@@ -104,7 +104,22 @@ export default {
       this.$refs.addRole.dialogVisible = true;
     },
     // 删除角色
-    removeRole() {},
+    removeRole() {
+      this.$confirm(
+        `是否确定删除当前角色`,
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        }
+      ).then(() => {
+        this.$message({
+          type: "success",
+          message: "删除成功!",
+        });
+      });
+    },
     // 绑定菜单权限
     bind() {
       this.$refs.menu.dialogVisible = true;
