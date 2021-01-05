@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="bold big_title">菜单管理</div>
     <div class="add_btn">
-      <el-button type="primary" @click="addRole" size="small" class="btn"
+      <el-button type="primary" @click="addMenu(1)" size="small" class="btn"
         >增加一级菜单</el-button
       >
     </div>
@@ -27,19 +27,28 @@
       <el-table-column prop="time" label="创建时间"> </el-table-column>
       <el-table-column label="操作" width="260">
         <template slot-scope="{ row }">
-          <el-button size="mini" plain @click="removeRole">编辑</el-button>
-          <el-button size="mini" plain @click="bind"> 删除 </el-button>
-          <el-button size="mini" plain @click="bind" v-if="row.children && row.children.length > 0 "> 增加子菜单 </el-button>
+          <el-button size="mini" plain @click="addMenu(3)">编辑</el-button>
+          <el-button size="mini" plain @click="removeMenu"> 删除 </el-button>
+          <el-button
+            size="mini"
+            plain
+            @click="addMenu(2)"
+            v-if="row.children && row.children.length > 0"
+          >
+            增加子菜单
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
+    <handle-menu ref="handle"></handle-menu>
   </div>
 </template>
 
 <script>
+import HandleMenu from "./dialogs/handleMenu";
 export default {
-  name: "",
-  components: {},
+  name: "Menu",
+  components: { HandleMenu },
   props: {},
   data() {
     return {
@@ -76,7 +85,7 @@ export default {
           ],
         },
 
-         {
+        {
           id: 4,
           name: "菜单管理",
           code: "4",
@@ -102,14 +111,37 @@ export default {
             },
           ],
         },
-
-       
       ],
     };
   },
   watch: {},
   computed: {},
-  methods: {},
+  methods: {
+    /**增加菜单 */
+    addMenu(layer) {
+      this.$refs.handle.dialogVisible = true;
+      if (layer == 1) {
+        this.$refs.handle.title = "增加一级菜单";
+      } else if (layer == 2) {
+        this.$refs.handle.title = "增加子菜单";
+      } else if (layer == 3) {
+        this.$refs.handle.title = "编辑菜单";
+      }
+    },
+    /**删除菜单 */
+    removeMenu() {
+      this.$confirm(`是否确定删除该菜单`, "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).then(() => {
+        this.$message({
+          type: "success",
+          message: "删除成功!",
+        });
+      });
+    },
+  },
   mounted() {},
 };
 </script>
