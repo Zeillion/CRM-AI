@@ -49,9 +49,9 @@ export default {
   watch: {},
   computed: {},
   methods: {
-      cancel(){
-          this.dialogVisible = false;
-      }
+    cancel() {
+      this.dialogVisible = false;
+    },
   },
   mounted() {},
 };

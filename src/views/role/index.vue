@@ -49,14 +49,16 @@
       </el-table-column>
     </el-table>
     <add-role ref="addRole"></add-role>
+    <bind-menu ref="menu"></bind-menu>
   </div>
 </template>
 
 <script>
 import AddRole from "./dialogs/addRole.vue";
+import BindMenu from "./dialogs/bindMenu.vue";
 export default {
   name: "",
-  components: { AddRole },
+  components: { AddRole, BindMenu },
   props: {},
   data() {
     return {
@@ -99,10 +101,14 @@ export default {
   methods: {
     goSearch() {},
     addRole() {
-        this.$refs.addRole.dialogVisible = true;
+      this.$refs.addRole.dialogVisible = true;
     },
     // 删除角色
     removeRole() {},
+    // 绑定菜单权限
+    bind() {
+      this.$refs.menu.dialogVisible = true;
+    },
   },
   mounted() {},
 };
