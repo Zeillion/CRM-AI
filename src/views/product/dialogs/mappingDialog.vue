@@ -88,31 +88,41 @@
                 size="small"
               >
                 <el-table-column>
-                  <template slot-scope="{ row }">
-                    <div class="data_box">
-                      <div v-for="(item, index) in row.data" :key="index">
-                        {{ item }}
-                      </div>
-                    </div>
-                    <div class="flex_vertical tri">
-                      <div
-                        class="self_triangle"
-                        :class="[rotate ? 'go' : 'aa']"
-                        @click="handleCollapse"
-                        ref="triangle"
-                      ></div>
-                    </div>
+                  <template slot-scope="scope">
+                    <el-radio-group v-model="radio">
+                      <el-radio :label="scope.$index">
+                        <div class="data_box">
+                          <div
+                            v-for="(item, index) in scope.row.newData"
+                            :key="index"
+                          >
+                            {{ item }}
+                          </div>
+                        </div>
+                        <div class="flex_vertical tri">
+                          <div
+                            class="self_triangle"
+                            :class="[scope.row.rotate ? 'go' : 'aa']"
+                            @click="handleCollapse(scope.row)"
+                            ref="triangle"
+                          ></div>
+                        </div>
+                      </el-radio>
+                    </el-radio-group>
                   </template>
                 </el-table-column>
               </el-table>
             </div>
+
+            <div class="footer flex_box">
+              <el-button plain @click="cancel" size="small">取消</el-button>
+              <el-button type="primary" @click="confirm" size="small"
+                >确定</el-button
+              >
+            </div>
           </div>
         </div>
       </div>
-      <!-- <div>
-        <el-button plain @click="cancel" size="small">取消</el-button>
-        <el-button type="primary" @click="confirm" size="small">确定</el-button>
-      </div> -->
     </el-dialog>
   </div>
 </template>
@@ -126,9 +136,10 @@ export default {
   props: {},
   data() {
     return {
+      temp: "",
       dialogVisible: false,
       leftValue: "",
-      rotate: false,
+      radio: 0,
       tableData: [
         {
           date: "2016-05-02",
@@ -176,6 +187,30 @@ export default {
             "头标材料：水晶",
             "身表材质：水晶",
           ],
+          newData: [
+            "唯一码：69123456778",
+            "本品品牌名称：雪花",
+            "内包装条形码：691234567",
+            "产品简称：雪花-脸谱300ml",
+            "本品品牌类别：xx",
+            "外包装条形码：212123231",
+            "外包装条形码：212123231",
+            "外包装条形码：212123231",
+            "酒精浓度：3",
+            "产品档次：高档",
+            "产品识别：脸谱",
+            "本品工艺：纯生",
+            "瓶型：01",
+            "瓶色：白瓶",
+            "内包装单位：01",
+            "内包装形式：卡纸",
+            "外包装单位：01",
+            "外包装形式：包",
+            "品牌属性：全国品牌",
+            "头标材料：水晶",
+            "身表材质：水晶",
+          ],
+          rotate: false,
         },
         {
           data: [
@@ -201,6 +236,130 @@ export default {
             "头标材料：水晶",
             "身表材质：水晶",
           ],
+          newData: [
+            "唯一码：69123456778",
+            "本品品牌名称：雪花",
+            "内包装条形码：691234567",
+            "产品简称：雪花-脸谱300ml",
+            "本品品牌类别：xx",
+            "外包装条形码：212123231",
+            "外包装条形码：212123231",
+            "外包装条形码：212123231",
+            "酒精浓度：3",
+            "产品档次：高档",
+            "产品识别：脸谱",
+            "本品工艺：纯生",
+            "瓶型：01",
+            "瓶色：白瓶",
+            "内包装单位：01",
+            "内包装形式：卡纸",
+            "外包装单位：01",
+            "外包装形式：包",
+            "品牌属性：全国品牌",
+            "头标材料：水晶",
+            "身表材质：水晶",
+          ],
+          rotate: false,
+        },
+
+        {
+          data: [
+            "唯一码：69123456778",
+            "本品品牌名称：雪花",
+            "内包装条形码：691234567",
+            "产品简称：雪花-脸谱300ml",
+            "本品品牌类别：xx",
+            "外包装条形码：212123231",
+            "外包装条形码：212123231",
+            "外包装条形码：212123231",
+            "酒精浓度：3",
+            "产品档次：高档",
+            "产品识别：脸谱",
+            "本品工艺：纯生",
+            "瓶型：01",
+            "瓶色：白瓶",
+            "内包装单位：01",
+            "内包装形式：卡纸",
+            "外包装单位：01",
+            "外包装形式：包",
+            "品牌属性：全国品牌",
+            "头标材料：水晶",
+            "身表材质：水晶",
+          ],
+          newData: [
+            "唯一码：69123456778",
+            "本品品牌名称：雪花",
+            "内包装条形码：691234567",
+            "产品简称：雪花-脸谱300ml",
+            "本品品牌类别：xx",
+            "外包装条形码：212123231",
+            "外包装条形码：212123231",
+            "外包装条形码：212123231",
+            "酒精浓度：3",
+            "产品档次：高档",
+            "产品识别：脸谱",
+            "本品工艺：纯生",
+            "瓶型：01",
+            "瓶色：白瓶",
+            "内包装单位：01",
+            "内包装形式：卡纸",
+            "外包装单位：01",
+            "外包装形式：包",
+            "品牌属性：全国品牌",
+            "头标材料：水晶",
+            "身表材质：水晶",
+          ],
+          rotate: false,
+        },
+
+        {
+          data: [
+            "唯一码：69123456778",
+            "本品品牌名称：雪花",
+            "内包装条形码：691234567",
+            "产品简称：雪花-脸谱300ml",
+            "本品品牌类别：xx",
+            "外包装条形码：212123231",
+            "外包装条形码：212123231",
+            "外包装条形码：212123231",
+            "酒精浓度：3",
+            "产品档次：高档",
+            "产品识别：脸谱",
+            "本品工艺：纯生",
+            "瓶型：01",
+            "瓶色：白瓶",
+            "内包装单位：01",
+            "内包装形式：卡纸",
+            "外包装单位：01",
+            "外包装形式：包",
+            "品牌属性：全国品牌",
+            "头标材料：水晶",
+            "身表材质：水晶",
+          ],
+          newData: [
+            "唯一码：69123456778",
+            "本品品牌名称：雪花",
+            "内包装条形码：691234567",
+            "产品简称：雪花-脸谱300ml",
+            "本品品牌类别：xx",
+            "外包装条形码：212123231",
+            "外包装条形码：212123231",
+            "外包装条形码：212123231",
+            "酒精浓度：3",
+            "产品档次：高档",
+            "产品识别：脸谱",
+            "本品工艺：纯生",
+            "瓶型：01",
+            "瓶色：白瓶",
+            "内包装单位：01",
+            "内包装形式：卡纸",
+            "外包装单位：01",
+            "外包装形式：包",
+            "品牌属性：全国品牌",
+            "头标材料：水晶",
+            "身表材质：水晶",
+          ],
+          rotate: false,
         },
       ],
     };
@@ -212,8 +371,18 @@ export default {
       this.dialogVisible = false;
     },
     /**点击三角形 */
-    handleCollapse() {
-      this.rotate = !this.rotate;
+    handleCollapse(row) {
+      row.rotate = !row.rotate;
+      //rotate为false的时候是收缩着的
+      //rotate为true的时候是展开的
+      //注意添加一个newData字段
+      if (row.rotate) {
+        //   需要收缩
+        row.newData = row.newData.slice(0, 6);
+      } else {
+        //   需要展开
+        row.newData = row.data;
+      }
     },
   },
   mounted() {},
@@ -250,13 +419,19 @@ export default {
       .right_table {
         border: 1px solid #dfe6ec;
         margin-top: 24px;
+        max-height: 450px;
+        overflow: auto;
         .data_box {
           display: flex;
           flex-wrap: wrap;
           div {
-            width: 30%;
+            width: 32%;
             color: #1f2d3d;
+            font-size: 12px;
             margin-right: 6px;
+            font-weight: 400;
+            line-height: 27px;
+            white-space: pre-wrap;
           }
         }
       }
@@ -279,11 +454,14 @@ export default {
 }
 
 .aa {
-  transition: all .5s;
+  transition: all 0.2s;
 }
 .go {
   transform: rotate(-180deg);
-  transition: all .5s;
+  transition: all 0.2s;
+}
+.footer{
+    margin-top:20px;
 }
 </style>
 <style lang="scss">
@@ -294,6 +472,13 @@ export default {
 
   .el-dialog__body {
     padding: 0 !important;
+  }
+  .el-radio {
+    display: flex;
+    align-items: flex-start;
+    .el-radio__input {
+      margin-top: 7px;
+    }
   }
 }
 </style>
