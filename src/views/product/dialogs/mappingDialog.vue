@@ -3,7 +3,7 @@
   <div>
     <el-dialog
       :visible.sync="dialogVisible"
-      width="80%"
+      width="90%"
       :before-close="handleClose"
       :show-close="false"
       :close-on-click-modal="false"
@@ -29,6 +29,7 @@
                 >搜索</el-button
               >
             </div>
+            <!-- 左侧表格 -->
             <div class="left_table">
               <el-table
                 :data="tableData"
@@ -36,11 +37,32 @@
                 :show-header="false"
                 size="small"
               >
-                <el-table-column prop="date" label="日期" width="180">
+                <el-table-column type="selection"> </el-table-column>
+                <el-table-column>
+                  <template slot-scope="{ row }">
+                    <el-image :src="row.img" class="img">
+                      <div slot="error" class="image-slot">
+                        <i class="el-icon-picture-outline"></i>
+                      </div>
+                    </el-image>
+                  </template>
                 </el-table-column>
-                <el-table-column prop="name" label="姓名" width="180">
+                <el-table-column width="350">
+                  <template slot-scope="{ row }">
+                    <div class="middle_td">
+                      <div v-for="(item, index) in row.data" :key="index">
+                        {{ item }}
+                      </div>
+                    </div>
+                  </template>
                 </el-table-column>
-                <el-table-column prop="address" label="地址"> </el-table-column>
+                <el-table-column>
+                  <template slot-scope="{ row }">
+                    <div class="right_td">
+                      {{ row.package }}
+                    </div>
+                  </template>
+                </el-table-column>
               </el-table>
             </div>
           </div>
@@ -142,24 +164,34 @@ export default {
       radio: 0,
       tableData: [
         {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
+          img: require("../../../assets/images/beer.jpeg"),
+          data: [
+            "条形码：69123456778",
+            "商品品牌：雪花",
+            "商品全称：雪花-脸谱300ml",
+            "包装形式：瓶装",
+          ],
+          package: "包装编号：01",
         },
         {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄",
+          img: require("../../../assets/images/beer.jpeg"),
+          data: [
+            "条形码：69123456778",
+            "商品品牌：雪花",
+            "商品全称：雪花-脸谱300ml",
+            "包装形式：瓶装",
+          ],
+          package: "包装编号：01",
         },
         {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄",
+          img: require("../../../assets/images/beer.jpeg"),
+          data: [
+            "条形码：69123456778",
+            "商品品牌：雪花",
+            "商品全称：雪花-脸谱300ml",
+            "包装形式：瓶装",
+          ],
+          package: "包装编号：01",
         },
       ],
       tableData2: [
@@ -460,8 +492,26 @@ export default {
   transform: rotate(-180deg);
   transition: all 0.2s;
 }
-.footer{
-    margin-top:20px;
+.footer {
+  margin-top: 20px;
+}
+.img {
+  width: 60px;
+  height: 60px;
+}
+.middle_td {
+  display: flex;
+  flex-wrap: wrap;
+  div {
+    width: 49%;
+    color: #1f2d3d;
+    font-size: 12px;
+  }
+}
+.right_td {
+  color: #1f2d3d;
+  font-size: 12px;
+  margin-top: 26px;
 }
 </style>
 <style lang="scss">
