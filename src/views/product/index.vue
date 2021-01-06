@@ -69,6 +69,7 @@
     </div>
 
     <!-- table -->
+      
 
     <div class="approval_tab">
       <el-tabs type="card">
@@ -115,7 +116,9 @@
                   <span v-if="row.stop == 0">停用</span>
                   <span v-else>启用</span>
                 </el-button>
-                <el-button size="small" type="text">映射</el-button>
+                <el-button size="small" type="text" @click="handleMap"
+                  >映射</el-button
+                >
                 <el-button size="small" type="text">修改</el-button>
                 <el-button size="small" type="text">
                   <span style="color: #034193">详情</span>
@@ -129,13 +132,15 @@
         </el-tab-pane>
       </el-tabs>
     </div>
+    <mapping-dialog ref="mapping"></mapping-dialog>
   </div>
 </template>
 
 <script>
+import MappingDialog from "./dialogs/mappingDialog.vue";
 export default {
   name: "Produc",
-  components: {},
+  components: { MappingDialog },
   computed: {},
   data() {
     return {
@@ -209,6 +214,10 @@ export default {
           message: "操作成功!",
         });
       });
+    },
+    /**印射操作 */
+    handleMap() {
+      this.$refs.mapping.dialogVisible = true;
     },
   },
 };

@@ -166,3 +166,13 @@ div:focus {
   color:#FF737E;
 }
 
+/*三角形图标*/
+.self_triangle{
+  width:0;
+  height:0;
+  border-width: 8px;
+  border-style: solid;
+  border-color:#BFCBD9 transparent transparent transparent;
+  cursor: pointer;
+}
+
