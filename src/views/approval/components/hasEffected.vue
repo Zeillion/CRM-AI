@@ -18,7 +18,7 @@
         prop="product"
         label="商品全称"
         fixed="left"
-        width="120,"
+        width="120"
       >
       </el-table-column>
       <el-table-column prop="barCode" label="条形码"> </el-table-column>
@@ -28,7 +28,7 @@
       <el-table-column prop="brand" label="商品品牌"> </el-table-column>
       <el-table-column prop="packageType" label="包装形式"> </el-table-column>
       <el-table-column prop="AIID" label="AI ID"> </el-table-column>
-      <el-table-column prop="status" label="印射状态"> </el-table-column>
+      <el-table-column prop="status" label="映射状态"> </el-table-column>
       <el-table-column prop="time" label="新增时间"> </el-table-column>
 
       <el-table-column label="操作" width="120">

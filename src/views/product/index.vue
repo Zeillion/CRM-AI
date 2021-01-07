@@ -57,7 +57,7 @@
           <el-form-item class="flex_item">
             <el-select
               v-model="form.package"
-              placeholder="印射状态"
+              placeholder="映射状态"
               size="small"
             >
               <el-option label="区域一" value="shanghai"></el-option>
@@ -102,7 +102,7 @@
             <el-table-column prop="brand" label="商品品牌"> </el-table-column>
             <el-table-column prop="packageType" label="包装形式">
             </el-table-column>
-            <el-table-column prop="status" label="印射状态"> </el-table-column>
+            <el-table-column prop="status" label="映射状态"> </el-table-column>
             <el-table-column prop="time" label="新增时间"> </el-table-column>
 
             <el-table-column label="操作" width="220">
@@ -222,7 +222,7 @@ export default {
         });
       });
     },
-    /**印射操作 */
+    /**映射操作 */
     handleMap() {
       this.$refs.mapping.dialogVisible = true;
     },

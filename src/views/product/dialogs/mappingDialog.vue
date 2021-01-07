@@ -1,5 +1,5 @@
 <template>
-  <!-- 印射弹窗 -->
+  <!-- 映射弹窗 -->
   <div>
     <el-dialog
       :visible.sync="dialogVisible"
@@ -30,7 +30,7 @@
               >
             </div>
             <!-- 左侧表格 -->
-            <div class="left_table">
+            <div class="left_table scroll">
               <el-table
                 :data="tableData"
                 style="width: 100%"
@@ -102,7 +102,7 @@
               >
             </div>
 
-            <div class="right_table">
+            <div class="right_table scroll">
               <el-table
                 :data="tableData2"
                 style="width: 100%"
