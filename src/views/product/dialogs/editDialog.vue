@@ -8,8 +8,8 @@
       :show-close="false"
       :close-on-click-modal="false"
     >
-     <div class="title flex_vertical">建档数据</div>
-    
+      <div class="title flex_vertical">建档数据</div>
+
       <!--建档数据 -->
 
       <div>
@@ -31,9 +31,9 @@
           <div class="bold" style="color: #222; line-height: 27px">
             商品图片：
           </div>
-            <div>
-              <el-button plain size="small" @click="upload">一键上传</el-button>
-            </div>
+          <div>
+            <el-button plain size="small" @click="upload">一键上传</el-button>
+          </div>
         </div>
         <div class="img_block">
           <!-- img_box -->
@@ -111,7 +111,7 @@
             商品信息:
           </div>
         </div>
-        <el-form ref="form" :model="form" label-width="120px" >
+        <el-form ref="form" :model="form" label-width="120px">
           <div class="form">
             <el-form-item label="商品包装唯一码" class="item">
               <el-input
@@ -278,20 +278,20 @@
                 <el-option label="区域二" value="beijing"></el-option>
               </el-select>
             </el-form-item>
-             <el-form-item label="AI ID" class="item">
-              <el-input
-                v-model="form.four"
-                size="small"
-              />
+            <el-form-item label="AI ID" class="item">
+              <el-input v-model="form.four" size="small" />
             </el-form-item>
           </div>
         </el-form>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button  @click="handleClose" size="small">取消</el-button>
-         <el-button  @click="confirm" size="small" type="primary">保存并提交</el-button>
+        <el-button @click="handleClose" size="small">取消</el-button>
+        <el-button @click="confirm" size="small" type="primary"
+          >保存并提交</el-button
+        >
       </span>
     </el-dialog>
+     <Upload ref="upload" />
   </div>
 </template>
 
@@ -328,6 +328,10 @@ export default {
       this.dialogVisible = false;
     },
     confirm() {},
+    /**点击一键传 */
+    upload() {
+      this.$refs.upload.uploadShow = true;
+    },
   },
   mounted() {},
 };
