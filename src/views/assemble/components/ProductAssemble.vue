@@ -39,46 +39,8 @@
         </el-tree>
       </div>
       <!-- 右侧表格 -->
-      <div class="flex">
-         <component :is="componentName"></component>
-        <el-table
-          :data="tableData"
-          stripe
-          border
-          style="width: 100%"
-          :header-cell-style="{
-            background: '#EFF2F7',
-            color: '#444',
-            border:0
-          }"
-          size="small"
-        >
-          <el-table-column label="组合名称">
-            <template slot-scope="{ row }">
-              <span style="color:#1D8CE0">{{ row.name }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="层级数" prop="layer"> </el-table-column>
-          <el-table-column label="包含商品数" prop="num"> </el-table-column>
-          <el-table-column label="创建日期" prop="createTime" width="120">
-          </el-table-column>
-          <el-table-column label="修改日期" prop="modifyTime" width="120">
-          </el-table-column>
-          <el-table-column label="备注信息" prop="remark"> </el-table-column>
-          <el-table-column label="操作" width="180">
-            <template slot-scope="{ row }">
-              <el-button size="small" type="text" @click="showDetail">
-                <span style="color: #ff737e">删除</span>
-              </el-button>
-              <el-button size="small" type="text" @click="showDetail">
-                <span style="color: #1d8ce0">修改</span>
-              </el-button>
-              <el-button size="small" type="text" @click="showDetail">
-                <span style="color: #034193">查看效果</span>
-              </el-button>
-            </template>
-          </el-table-column>
-        </el-table>
+      <div class="flex right_table">
+        <component :is="componentName"></component>
       </div>
     </div>
     <add-assemble ref="add"></add-assemble>
@@ -87,9 +49,11 @@
 
 <script>
 import AddAssemble from "../dialogs/addAssemble.vue";
+import ParentTable from "./parentTable";
+import LeafTable from "./leafTable"
 export default {
   name: "ProductAssemble",
-  components: { AddAssemble },
+  components: { AddAssemble, ParentTable,LeafTable },
   props: {},
   data() {
     return {
@@ -98,17 +62,8 @@ export default {
         children: "children",
         label: "label",
       },
-      targetNode:null,//当前选中的节点
-      tableData: [
-        {
-          name: "0-5元",
-          layer: 2,
-          num: 20,
-          createTime: "2020-09-22 13:21",
-          modifyTime: "2020-09-22 13:21",
-          remark: "文字描述",
-        },
-      ],
+      targetNode: null, //当前选中的节点
+      componentName: "",
       data: [
         {
           id: 1,
@@ -157,7 +112,7 @@ export default {
               id: 21,
               label: "A渠道",
             },
-             {
+            {
               id: 22,
               label: "B渠道",
             },
@@ -186,11 +141,16 @@ export default {
       // 根据节点内容结构的不同，右侧的按钮以及表格内容也会有变化 leena
       /**1:一级，二级节点，也可创建商品，若子结点已是商品，则本节点对应内容需显示相应“查看重复sku”，“查看未选sku”按钮 */
       /**2:三级节点只可以创建商品 */
+      if (data.children && data.children.length > 0) {
+        this.componentName = "ParentTable"
+      }else{
+        this.componentName = "LeafTable"
+      }
     },
   },
   mounted() {
     /**处理默认节点 */
-    this.targetNode = this.data[0];
+    this.handleNodeClick(this.data[0]);
   },
 };
 </script>
@@ -203,6 +163,9 @@ export default {
 }
 .content {
   margin-top: 20px;
+  .right_table{
+    overflow-x: auto;
+  }
 }
 </style>
 <style lang="scss">
