@@ -69,7 +69,6 @@
     </div>
 
     <!-- table -->
-      
 
     <div class="approval_tab">
       <el-tabs type="card">
@@ -119,11 +118,13 @@
                 <el-button size="small" type="text" @click="handleMap"
                   >映射</el-button
                 >
-                <el-button size="small" type="text">修改</el-button>
-                <el-button size="small" type="text">
+                <el-button size="small" type="text" @click="edit"
+                  >修改</el-button
+                >
+                <el-button size="small" type="text" @click="showDetail">
                   <span style="color: #034193">详情</span>
                 </el-button>
-                <el-button size="small" type="text">
+                <el-button size="small" type="text" @click="showRecord">
                   <span style="color: #fe934f">操作记录</span>
                 </el-button>
               </template>
@@ -133,14 +134,20 @@
       </el-tabs>
     </div>
     <mapping-dialog ref="mapping"></mapping-dialog>
+    <detail-dialog ref="detail"></detail-dialog>
+    <record-dialog ref="record"></record-dialog>
+    <edit-dialog ref="edit"></edit-dialog>
   </div>
 </template>
 
 <script>
 import MappingDialog from "./dialogs/mappingDialog.vue";
+import DetailDialog from "./dialogs/detailDialog";
+import RecordDialog from "../approval/dialogs/recordDialog";
+import EditDialog from "./dialogs/editDialog";
 export default {
-  name: "Produc",
-  components: { MappingDialog },
+  name: "Product",
+  components: { MappingDialog, DetailDialog, RecordDialog, EditDialog },
   computed: {},
   data() {
     return {
@@ -218,6 +225,18 @@ export default {
     /**印射操作 */
     handleMap() {
       this.$refs.mapping.dialogVisible = true;
+    },
+    /**点击详情 */
+    showDetail() {
+      this.$refs.detail.dialogVisible = true;
+    },
+    /**点击操作记录 */
+    showRecord() {
+      this.$refs.record.dialogVisible = true;
+    },
+    /**点击修改 */
+    edit() {
+      this.$refs.edit.dialogVisible = true;x
     },
   },
 };

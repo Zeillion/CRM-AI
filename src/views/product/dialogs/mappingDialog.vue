@@ -193,6 +193,56 @@ export default {
           ],
           package: "包装编号：01",
         },
+        {
+          img: require("../../../assets/images/beer.jpeg"),
+          data: [
+            "条形码：69123456778",
+            "商品品牌：雪花",
+            "商品全称：雪花-脸谱300ml",
+            "包装形式：瓶装",
+          ],
+          package: "包装编号：01",
+        },
+        {
+          img: require("../../../assets/images/beer.jpeg"),
+          data: [
+            "条形码：69123456778",
+            "商品品牌：雪花",
+            "商品全称：雪花-脸谱300ml",
+            "包装形式：瓶装",
+          ],
+          package: "包装编号：01",
+        },
+        {
+          img: require("../../../assets/images/beer.jpeg"),
+          data: [
+            "条形码：69123456778",
+            "商品品牌：雪花",
+            "商品全称：雪花-脸谱300ml",
+            "包装形式：瓶装",
+          ],
+          package: "包装编号：01",
+        },
+        {
+          img: require("../../../assets/images/beer.jpeg"),
+          data: [
+            "条形码：69123456778",
+            "商品品牌：雪花",
+            "商品全称：雪花-脸谱300ml",
+            "包装形式：瓶装",
+          ],
+          package: "包装编号：01",
+        },
+        {
+          img: require("../../../assets/images/beer.jpeg"),
+          data: [
+            "条形码：69123456778",
+            "商品品牌：雪花",
+            "商品全称：雪花-脸谱300ml",
+            "包装形式：瓶装",
+          ],
+          package: "包装编号：01",
+        },
       ],
       tableData2: [
         {
@@ -440,6 +490,8 @@ export default {
       .left_table {
         border: 1px solid #dfe6ec;
         margin-top: 24px;
+        max-height: 450px;
+        overflow: auto;
       }
     }
   }

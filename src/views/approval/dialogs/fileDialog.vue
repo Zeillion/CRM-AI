@@ -335,8 +335,9 @@
         </span>
       </el-dialog>
       <reject-dialog ref="reject"></reject-dialog>
+      <Upload ref="upload" />
       <!-- 一键上传弹窗 -->
-      <el-dialog
+      <!-- <el-dialog
         :visible.sync="uploadShow"
         title="上传图片"
         width="420px"
@@ -365,7 +366,7 @@
             >提交</el-button
           >
         </span>
-      </el-dialog>
+      </el-dialog> -->
     </div>
   </div>
 </template>
@@ -380,7 +381,6 @@ export default {
   data() {
     return {
       dialogVisible: false,
-      uploadShow: false,
       collapseName: "1",
       img: require("../../../assets/images/beer.jpeg"),
       form: {
@@ -428,14 +428,9 @@ export default {
     },
     // 一键上传
     upload() {
-      this.uploadShow = true;
+      this.$refs.upload.uploadShow = true;
     },
-    closeUpload(){
-      this.uploadShow = false;
-    },
-    submitUpload(){
-      this.uploadShow = false;
-    }
+  
   },
   mounted() {},
 };

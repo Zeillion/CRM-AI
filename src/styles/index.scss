@@ -176,3 +176,9 @@ div:focus {
   cursor: pointer;
 }
 
+/*详情弹窗内的表单展示*/
+.detail_dialog{
+  .el-form-item {
+    margin-bottom: 7px;
+  }
+}

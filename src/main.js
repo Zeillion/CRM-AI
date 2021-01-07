@@ -32,6 +32,8 @@ Vue.config.productionTip = false
 Vue.component("Pagination", Pagination);
 import Sticky from "@/components/Sticky";
 Vue.component("Sticky", Sticky);
+import Upload from "@/components/Upload";
+Vue.component("Upload", Upload);
 
 new Vue({
   el: '#app',
