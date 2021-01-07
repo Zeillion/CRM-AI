@@ -36,10 +36,12 @@
       :data="tableData"
       stripe
       style="width: 100%"
+      border
       :header-cell-style="{
         background: '#EFF2F7',
         color: '#444',
         'font-size': '14px',
+        border:0
       }"
       :cell-style="cellStyle"
     >
@@ -71,7 +73,6 @@ export default {
     return {
       keyword: "",
       cellStyle: {
-        "border-right": "1px solid #E4E4E4",
         "font-size": "12px",
         color: "#000",
       },

@@ -11,11 +11,13 @@
       class="table"
       row-key="id"
       border
+      stripe
       default-expand-all
       :header-cell-style="{
         background: '#EFF2F7',
         color: '#444',
         'font-size': '14px',
+        border:0
       }"
       :cell-style="cellStyle"
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
@@ -53,7 +55,6 @@ export default {
   data() {
     return {
       cellStyle: {
-        "border-right": "1px solid #E4E4E4",
         "font-size": "12px",
         color: "#000",
       },

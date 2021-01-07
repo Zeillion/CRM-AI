@@ -39,22 +39,23 @@
         </el-tree>
       </div>
       <!-- 右侧表格 -->
-      <component :is="componentName"></component>
       <div class="flex">
+         <component :is="componentName"></component>
         <el-table
           :data="tableData"
           stripe
+          border
           style="width: 100%"
           :header-cell-style="{
             background: '#EFF2F7',
             color: '#444',
+            border:0
           }"
-          :cell-style="cellStyle"
           size="small"
         >
           <el-table-column label="组合名称">
             <template slot-scope="{ row }">
-              <span>{{ row.name }}</span>
+              <span style="color:#1D8CE0">{{ row.name }}</span>
             </template>
           </el-table-column>
           <el-table-column label="层级数" prop="layer"> </el-table-column>
@@ -97,6 +98,7 @@ export default {
         children: "children",
         label: "label",
       },
+      targetNode:null,//当前选中的节点
       tableData: [
         {
           name: "0-5元",
@@ -180,10 +182,16 @@ export default {
     goSearch() {},
     /**点击节点 */
     handleNodeClick(data) {
-      debugger;
+      this.targetNode = data;
+      // 根据节点内容结构的不同，右侧的按钮以及表格内容也会有变化 leena
+      /**1:一级，二级节点，也可创建商品，若子结点已是商品，则本节点对应内容需显示相应“查看重复sku”，“查看未选sku”按钮 */
+      /**2:三级节点只可以创建商品 */
     },
   },
-  mounted() {},
+  mounted() {
+    /**处理默认节点 */
+    this.targetNode = this.data[0];
+  },
 };
 </script>
 <style lang="scss" scoped>

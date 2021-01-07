@@ -25,7 +25,7 @@
           ></el-input>
         </el-form-item>
       </el-form>
-      <div class="tip">*集合和产品不能同时存在同一个集合下</div>
+      <div class="tip">*组合和产品不能同时存在同一个集合下</div>
       <span slot="footer" class="dialog-footer">
         <el-button plain @click="handleClose" size="small">取消</el-button>
         <el-button @click="confirm" size="small" type="primary"

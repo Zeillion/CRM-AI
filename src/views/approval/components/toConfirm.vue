@@ -5,10 +5,12 @@
       :data="tableData"
       stripe
       style="width: 100%"
+      border
       :header-cell-style="{
         background: '#EBEDF3',
         color: '#444',
         'font-size': '14px',
+        border:0
       }"
       :cell-style="cellStyle"
     >
@@ -54,7 +56,6 @@ export default {
   data() {
     return {
       cellStyle: {
-        "border-right": "1px solid #E4E4E4",
         "font-size": "12px",
         "color":"#000"
       },
