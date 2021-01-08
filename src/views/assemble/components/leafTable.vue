@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 商品table -->
     <el-table
       :data="tableData"
       stripe
@@ -45,116 +46,23 @@
 export default {
   name: "LeafTable",
   components: {},
-  props: {},
+  props: {
+    list:Array
+  },
   data() {
     return {
-      tableData: [
-        {
-          img: "",
-          product: "雪花-脸谱300ml",
-          barCode: 692319381,
-          packageCode: "11",
-          type: "POSM",
-          isSelf: "本品",
-          brand: "雪花",
-          AIID: "122331",
-          status: "CRM",
-          packageType: "瓶装",
-          time: "2020-09-22",
-          name: "脸谱300ml",
-          reporter: "张三",
-          phone: 18082823838,
-          time: "2020-12-12 19:00:00",
-        },
-        {
-          img: "",
-          product: "雪花-脸谱300ml",
-          barCode: 692319381,
-          packageCode: "11",
-          type: "POSM",
-          isSelf: "本品",
-          brand: "雪花",
-          AIID: "122331",
-          status: "CRM",
-          packageType: "瓶装",
-          time: "2020-09-22",
-          name: "脸谱300ml",
-          reporter: "张三",
-          phone: 18082823838,
-          time: "2020-12-12 19:00:00",
-        },
-        {
-          img: "",
-          product: "雪花-脸谱300ml",
-          barCode: 692319381,
-          packageCode: "11",
-          type: "POSM",
-          isSelf: "本品",
-          brand: "雪花",
-          AIID: "122331",
-          status: "CRM",
-          packageType: "瓶装",
-          time: "2020-09-22",
-          name: "脸谱300ml",
-          reporter: "张三",
-          phone: 18082823838,
-          time: "2020-12-12 19:00:00",
-        },
-        {
-          img: "",
-          product: "雪花-脸谱300ml",
-          barCode: 692319381,
-          packageCode: "11",
-          type: "POSM",
-          isSelf: "本品",
-          brand: "雪花",
-          AIID: "122331",
-          status: "CRM",
-          packageType: "瓶装",
-          time: "2020-09-22",
-          name: "脸谱300ml",
-          reporter: "张三",
-          phone: 18082823838,
-          time: "2020-12-12 19:00:00",
-        },
-        {
-          img: "",
-          product: "雪花-脸谱300ml",
-          barCode: 692319381,
-          packageCode: "11",
-          type: "POSM",
-          isSelf: "本品",
-          brand: "雪花",
-          AIID: "122331",
-          status: "CRM",
-          packageType: "瓶装",
-          time: "2020-09-22",
-          name: "脸谱300ml",
-          reporter: "张三",
-          phone: 18082823838,
-          time: "2020-12-12 19:00:00",
-        },
-        {
-          img: "",
-          product: "雪花-脸谱300ml",
-          barCode: 692319381,
-          packageCode: "11",
-          type: "POSM",
-          isSelf: "本品",
-          brand: "雪花",
-          AIID: "122331",
-          status: "CRM",
-          packageType: "瓶装",
-          time: "2020-09-22",
-          name: "脸谱300ml",
-          reporter: "张三",
-          phone: 18082823838,
-          time: "2020-12-12 19:00:00",
-        },
-      ],
+      tableData:[]
     };
   },
-  watch: {},
+  watch: {
+    list:{
+      handler(val){
+        this.tableData = val;
+      },
+      deep:true,
+      immediate:true
+    }
+  },
   computed: {},
   methods: {
       /**点击详情 */
@@ -162,7 +70,8 @@ export default {
       /**点击移除 */
       remove(){}
   },
-  mounted() {},
+  mounted() {
+  },
 };
 </script>
 <style lang="scss" scoped>

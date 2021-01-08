@@ -51,7 +51,8 @@ export default {
         name: "",
         tip: "",
       },
-      title:"创建组合"
+      title:"创建组合",
+      flag:null //0是根组合，1是普通
     };
   },
   watch: {},
@@ -62,7 +63,10 @@ export default {
       this.dialogVisible = false;
     },
     /**创建 */
-    confirm() {},
+    confirm() {
+      // 模拟
+      this.$emit('addSucc',this.form)
+    },
   },
   mounted() {},
 };

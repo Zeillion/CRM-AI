@@ -26,7 +26,7 @@
               <el-form-item>
                 <el-button
                   type="primary"
-                  @click="onSubmit"
+                  @click="goSearch"
                   size="mini"
                   class="btn"
                   icon="el-icon-search"
@@ -307,6 +307,8 @@ export default {
     add() {
       this.$message.success("添加成功");
     },
+    /**搜索 */
+    goSearch(){}
   },
   mounted() {},
 };
