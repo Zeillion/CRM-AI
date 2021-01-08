@@ -2,7 +2,7 @@
   <!-- 新增组合 -->
   <div>
     <el-dialog
-      title="创建组合"
+      :title="title"
       :visible.sync="dialogVisible"
       width="420px"
       :before-close="handleClose"
@@ -51,6 +51,7 @@ export default {
         name: "",
         tip: "",
       },
+      title:"创建组合"
     };
   },
   watch: {},

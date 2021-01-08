@@ -27,25 +27,27 @@
       <el-table-column label="备注信息" prop="remark"> </el-table-column>
       <el-table-column label="操作" width="180">
         <template slot-scope="{ row }">
-          <el-button size="small" type="text" @click="showDetail">
-            <span style="color: #ff737e">删除</span>
+          <el-button size="small" type="text" @click="remove">
+            <span class="red_btn">删除</span>
+          </el-button>
+          <el-button size="small" type="text" @click="edit">
+            修改
           </el-button>
           <el-button size="small" type="text" @click="showDetail">
-            <span style="color: #1d8ce0">修改</span>
-          </el-button>
-          <el-button size="small" type="text" @click="showDetail">
-            <span style="color: #034193">查看效果</span>
+            <span class="deep_blue_btn">查看效果</span>
           </el-button>
         </template>
       </el-table-column>
     </el-table>
+    <add-assemble ref="edit"></add-assemble>
   </div>
 </template>
 
 <script>
+import AddAssemble from '../dialogs/addAssemble.vue';
 export default {
   name: "parentTable",
-  components: {},
+  components: {AddAssemble},
   props: {},
   data() {
     return {
@@ -63,7 +65,29 @@ export default {
   },
   watch: {},
   computed: {},
-  methods: {},
+  methods: {
+    /**点击删除 */
+    remove(){
+       this.$confirm(
+        `是否删除该组合以及组合下商品`,
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+        }
+      ).then(() => {
+        this.$message({
+          type: "success",
+          message: "删除成功!",
+        });
+      });
+    },
+    /**修改 */
+    edit(){
+      this.$refs.edit.dialogVisible = true;
+      this.$refs.edit.title = "修改组合"
+    }
+  },
   mounted() {},
 };
 </script>

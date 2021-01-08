@@ -74,15 +74,15 @@
               </el-select>
             </el-form-item>
             <el-form-item class="flex_item flex">
-              <el-select v-model="form.package" size="mini">
+              <el-select v-model="form.add" size="mini">
                 <el-option label="" value="全部"></el-option>
-                <el-option label="区域一" value="已添加"></el-option>
-                <el-option label="区域二" value="未添加"></el-option>
+                <el-option label="已添加" value="已添加"></el-option>
+                <el-option label="未添加" value="未添加"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="flex_item">
-              <el-button @click="add" size="mini" class="btn" plain
-                >添加</el-button
+              <el-button @click="bactchAdd" size="mini" class="btn" plain
+                >批量添加</el-button
               >
             </el-form-item>
           </div>
@@ -130,17 +130,16 @@
 
           <el-table-column label="操作" width="120">
             <template slot-scope="{ row }">
-              <el-button size="small" type="text" @click="showRecord">
-                <span style="color: #034193">详情</span>
-              </el-button>
               <el-button size="small" type="text" @click="showDetail">
-                <span style="color: #1d8ce0">
-                  {{ row.hasAdded ? "已添加" : "添加" }}
-                </span>
+                <span class="deep_blue_btn">详情</span>
+              </el-button>
+              <el-button size="small" type="text" @click="add">
+                {{ row.hasAdded ? "已添加" : "添加" }}
               </el-button>
             </template>
           </el-table-column>
         </el-table>
+        <div class="tip">* 集合和产品不能同时存在在同一个集合下；</div>
         <Pagination
           v-show="total > 9"
           :total="total"
@@ -166,9 +165,9 @@ export default {
   data() {
     return {
       dialogVisible: false,
-      total:10,
-      pageSize:10,
-      pageNumber:1,
+      total: 0,
+      pageSize: 10,
+      pageNumber: 1,
       cellStyle: {
         color: "#000",
       },
@@ -177,6 +176,7 @@ export default {
         type: "",
         brand: "",
         package: "",
+        add: "",
       },
       tableData: [
         {
@@ -302,7 +302,11 @@ export default {
       return row.hasAdded ? false : true;
     },
     /**获取商品列表 */
-    getData(){}
+    getData() {},
+    /**添加商品 */
+    add() {
+      this.$message.success("添加成功");
+    },
   },
   mounted() {},
 };
@@ -323,6 +327,11 @@ export default {
 }
 .table {
   margin: 20px;
+}
+.tip {
+  color: #ff713e;
+  font-size: 12px;
+  margin-top: 20px;
 }
 </style>
 <style lang="scss">

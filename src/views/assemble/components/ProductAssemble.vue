@@ -30,7 +30,7 @@
           size="small"
           class="btn"
           v-show="showProBtn"
-          >添加商品</el-button
+          >创建商品</el-button
         >
       </div>
     </div>
@@ -176,7 +176,7 @@ export default {
         this.showProBtn = true;
       } else if (
         (data.layer == 1 || data.layer == 2) &&
-        data.children.length == 0
+        (!data.children || data.children.length == 0)
       ) {
         // 第一二级别 还没有子节点的时候
         //1 挂了商品
@@ -190,11 +190,13 @@ export default {
         }
       } else if (
         (data.layer == 1 || data.layer == 2) &&
+        data.children &&
         data.children.length > 0
       ) {
         // 第一二级别 有子节点的时候
         this.showAssBtn = true;
-        this.showProBtn = true;
+        this.showProBtn = false;
+        this.componentName = "ParentTable";
       }
       // if (data.children && data.children.length > 0) {
       //   this.componentName = "ParentTable";

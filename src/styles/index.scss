@@ -218,3 +218,25 @@ div:focus {
   border-radius: 6px;
   background: #F1F1F1;
 }
+
+
+
+/*自定义按钮*/
+.deep_blue_btn{
+  color:#034193;
+  &:hover{
+    opacity: 0.7;
+  }
+}
+.red_btn{
+  color:#FF737E;
+  &:hover{
+    opacity: 0.7;
+  }
+}
+.orange_btn{
+  color:#FE934F;
+  &:hover{
+    opacity: 0.7;
+  }
+}

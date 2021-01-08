@@ -124,10 +124,10 @@
                   >修改</el-button
                 >
                 <el-button size="small" type="text" @click="showDetail">
-                  <span style="color: #034193">详情</span>
+                  <span class="deep_blue_btn">详情</span>
                 </el-button>
                 <el-button size="small" type="text" @click="showRecord">
-                  <span style="color: #fe934f">操作记录</span>
+                  <span class="orange_btn">操作记录</span>
                 </el-button>
               </template>
             </el-table-column>

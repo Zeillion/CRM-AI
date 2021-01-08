@@ -40,7 +40,7 @@
           >
           <el-button size="small" type="text" @click="showDetail"
             >
-            <span style="color:#FE934F">详情</span>
+            <span class="orange_btn">详情</span>
             </el-button
           >
         </template>
