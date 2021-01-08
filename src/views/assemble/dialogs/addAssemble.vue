@@ -9,7 +9,12 @@
       :close-on-click-modal="false"
       :show-close="false"
     >
-      <el-form ref="form" :model="form" label-width="70px" style="margin-top:-20px">
+      <el-form
+        ref="form"
+        :model="form"
+        label-width="70px"
+        style="margin-top: -20px"
+      >
         <el-form-item label="组合名称">
           <el-input
             placeholder="请输入组合名称"
@@ -25,14 +30,12 @@
           ></el-input>
         </el-form-item>
       </el-form>
-      <div class="tip">*组合和产品不能同时存在同一个集合下</div>
+      <div class="tip">*组合和产品不能同时存在同一个组合下</div>
       <span slot="footer" class="dialog-footer">
         <el-button plain @click="handleClose" size="small">取消</el-button>
-        <el-button @click="confirm" size="small" type="primary"
-          >创建</el-button
-        >
-      </span></el-dialog
-    >
+        <el-button @click="confirm" size="small" type="primary">创建</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -53,12 +56,12 @@ export default {
   watch: {},
   computed: {},
   methods: {
-      /**取消 */
+    /**取消 */
     handleClose() {
       this.dialogVisible = false;
     },
     /**创建 */
-    confirm(){}
+    confirm() {},
   },
   mounted() {},
 };

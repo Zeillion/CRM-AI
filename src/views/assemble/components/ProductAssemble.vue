@@ -16,9 +16,21 @@
             >搜索</el-button
           >
         </div>
-
-        <el-button type="primary" @click="addAssemble" size="small" class="btn"
+        <el-button
+          type="primary"
+          @click="addAssemble"
+          size="small"
+          class="btn"
+          v-show="showAssBtn"
           >创建组合</el-button
+        >
+        <el-button
+          type="primary"
+          @click="addProduct"
+          size="small"
+          class="btn"
+          v-show="showProBtn"
+          >添加商品</el-button
         >
       </div>
     </div>
@@ -44,16 +56,18 @@
       </div>
     </div>
     <add-assemble ref="add"></add-assemble>
+    <add-product ref="addProduct"></add-product>
   </div>
 </template>
 
 <script>
 import AddAssemble from "../dialogs/addAssemble.vue";
 import ParentTable from "./parentTable";
-import LeafTable from "./leafTable"
+import LeafTable from "./leafTable";
+import AddProduct from "../dialogs/addProduct.vue";
 export default {
   name: "ProductAssemble",
-  components: { AddAssemble, ParentTable,LeafTable },
+  components: { AddAssemble, ParentTable, LeafTable, AddProduct },
   props: {},
   data() {
     return {
@@ -62,24 +76,31 @@ export default {
         children: "children",
         label: "label",
       },
+      showAssBtn: false, //控制创建组合按钮
+      showProBtn: false, //控制创建商品按钮
       targetNode: null, //当前选中的节点
       componentName: "",
       data: [
         {
           id: 1,
           label: "价格区间内组合",
+          layer: 1,
           children: [
             {
               id: 11,
               label: "0-5元系列",
+              layer: 2,
               children: [
                 {
                   id: 111,
                   label: "0-2元系列",
+                  layer: 3,
                 },
                 {
                   id: 112,
                   label: "2-5元系列",
+                  isLeaf: true,
+                  layer: 3,
                 },
               ],
             },
@@ -87,18 +108,22 @@ export default {
             {
               id: 12,
               label: "5-10元系列",
+              layer: 2,
               children: [
                 {
                   id: 122,
                   label: "6-7元系列",
+                  layer: 3,
                 },
                 {
                   id: 123,
                   label: "7-8元系列",
+                  layer: 3,
                 },
                 {
                   id: 124,
                   label: "8-10元系列",
+                  layer: 3,
                 },
               ],
             },
@@ -107,20 +132,24 @@ export default {
         {
           id: 2,
           label: "按渠道组合",
+          layer: 1,
           children: [
             {
               id: 21,
               label: "A渠道",
+              layer: 2,
             },
             {
               id: 22,
               label: "B渠道",
+              layer: 2,
             },
           ],
         },
         {
           id: 3,
           label: "按系列组合",
+          layer: 1,
           children: [],
         },
       ],
@@ -141,11 +170,47 @@ export default {
       // 根据节点内容结构的不同，右侧的按钮以及表格内容也会有变化 leena
       /**1:一级，二级节点，也可创建商品，若子结点已是商品，则本节点对应内容需显示相应“查看重复sku”，“查看未选sku”按钮 */
       /**2:三级节点只可以创建商品 */
-      if (data.children && data.children.length > 0) {
-        this.componentName = "ParentTable"
-      }else{
-        this.componentName = "LeafTable"
+      if (data.layer == 3) {
+        // 到子节点了，该系统只能有3级结构
+        this.showAssBtn = false;
+        this.showProBtn = true;
+      } else if (
+        (data.layer == 1 || data.layer == 2) &&
+        data.children.length == 0
+      ) {
+        // 第一二级别 还没有子节点的时候
+        //1 挂了商品
+        if (data.isLeaf) {
+          this.showAssBtn = false;
+          this.showAssBtn = true;
+        } else {
+          // 2 没挂商品
+          this.showAssBtn = true;
+          this.showProBtn = true;
+        }
+      } else if (
+        (data.layer == 1 || data.layer == 2) &&
+        data.children.length > 0
+      ) {
+        // 第一二级别 有子节点的时候
+        this.showAssBtn = true;
+        this.showProBtn = true;
       }
+      // if (data.children && data.children.length > 0) {
+      //   this.componentName = "ParentTable";
+      //   this.showAssBtn = true;
+      //   this.showProBtn = false;
+      // } else if ((data.children.length = 0)) {
+      // } else {
+      //   // 挂载了商品，已经是叶节点
+      //   this.componentName = "LeafTable";
+      //   this.showProBtn = true;
+      //   this.showAssBtn = false;
+      // }
+    },
+    /**添加商品 */
+    addProduct() {
+      this.$refs.addProduct.dialogVisible = true;
     },
   },
   mounted() {
@@ -163,7 +228,7 @@ export default {
 }
 .content {
   margin-top: 20px;
-  .right_table{
+  .right_table {
     overflow-x: auto;
   }
 }

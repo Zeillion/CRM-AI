@@ -41,7 +41,7 @@ export default {
     },
     layout: {
       type: String,
-      default: "prev, pager, next, jumper ,sizes,total",
+      default: "total,jumper, prev, pager, next,sizes",
     },
     background: {
       type: Boolean,
@@ -93,7 +93,9 @@ export default {
 
 <style scoped>
 .pagination-container {
-  padding: 32px 16px;
+  padding: 24px 16px;
+  display: flex;
+  justify-content: center;
 }
 .pagination-container.hidden {
   display: none;
@@ -104,8 +106,8 @@ export default {
 .pagination-container {
   .btn-prev,
   .btn-next {
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     background: #fff !important;
     color: #b7b7b7;
     border: 1px solid #dfdfdf;
@@ -115,19 +117,19 @@ export default {
     border: 1px solid #dfdfdf;
   }
   .number {
-    width: 36px;
-    height: 36px !important;
-    line-height: 36px;
+    width: 28x;
+    height: 28px !important;
+    line-height: 28px;
   }
   .el-pagination__editor.el-input .el-input__inner {
-    height: 36px;
+    height: 28x;
   }
   .el-pagination .el-select .el-input .el-input__inner {
-    height: 36px;
+    height: 28px;
   }
   
 }
 .el-pagination__total{
-    line-height:36px!important;
+    line-height:28px!important;
   }
 </style>

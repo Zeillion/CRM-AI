@@ -185,6 +185,8 @@ export default {
     addFile() {
       this.$refs.addFile.dialogVisible = true;
     },
+    /**获取表格数据 */
+    getData(){}
   },
 };
 </script>
