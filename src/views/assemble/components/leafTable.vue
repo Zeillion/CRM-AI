@@ -13,8 +13,7 @@
       }"
       size="small"
     >
-      <el-table-column prop="img" label="24位图" >
-      </el-table-column>
+      <el-table-column prop="img" label="24位图"> </el-table-column>
       <el-table-column prop="product" label="商品全称" width="120">
       </el-table-column>
       <el-table-column prop="barCode" label="条形码"> </el-table-column>
@@ -28,50 +27,51 @@
 
       <el-table-column label="操作" width="120" fixed="right">
         <template slot-scope="{ row }">
-          <el-button size="small" type="text" @click="remove"
-            >
-            <span style="color:#FF737E">移除</span>
-            </el-button
-          >
+          <el-button size="small" type="text" @click="remove">
+            <span style="color: #ff737e">移除</span>
+          </el-button>
           <el-button size="small" type="text" @click="showDetail">
             <span style="color: #034193">详情</span>
           </el-button>
         </template>
       </el-table-column>
     </el-table>
+    <detail-dialog ref="detail"></detail-dialog>
   </div>
 </template>
 
 <script>
+import DetailDialog from "../../approval/dialogs/detailDialog";
 export default {
   name: "LeafTable",
-  components: {},
+  components: { DetailDialog },
   props: {
-    list:Array
+    list: Array,
   },
   data() {
     return {
-      tableData:[]
+      tableData: [],
     };
   },
   watch: {
-    list:{
-      handler(val){
+    list: {
+      handler(val) {
         this.tableData = val;
       },
-      deep:true,
-      immediate:true
-    }
+      deep: true,
+      immediate: true,
+    },
   },
   computed: {},
   methods: {
-      /**点击详情 */
-      showDetail(){},
-      /**点击移除 */
-      remove(){}
+    /**点击详情 */
+    showDetail() {
+      this.$refs.detail.dialogVisible = true;
+    },
+    /**点击移除 */
+    remove() {},
   },
-  mounted() {
-  },
+  mounted() {},
 };
 </script>
 <style lang="scss" scoped>

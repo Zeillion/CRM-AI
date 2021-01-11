@@ -139,7 +139,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <div class="tip">* 集合和产品不能同时存在在同一个集合下；</div>
+        <div class="tip">* 组合和产品不能同时存在在同一个集合下；</div>
         <Pagination
           v-show="total > 9"
           :total="total"

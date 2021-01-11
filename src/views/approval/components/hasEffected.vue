@@ -47,7 +47,7 @@
       </el-table-column>
     </el-table>
     <record-dialog ref="record"></record-dialog>
-    <detail-dialog ref="detail"></detail-dialog>
+    c
   </div>
 </template>
 

@@ -18,7 +18,8 @@
           <span style="color: #1d8ce0">{{ row.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="该组合下层级数" prop="layer" width="120"> </el-table-column>
+      <el-table-column label="该组合下层级数" prop="layer" width="120">
+      </el-table-column>
       <el-table-column label="包含商品数" prop="num"> </el-table-column>
       <el-table-column label="创建日期" prop="createTime" width="120">
       </el-table-column>
@@ -30,24 +31,24 @@
           <el-button size="small" type="text" @click="remove">
             <span class="red_btn">删除</span>
           </el-button>
-          <el-button size="small" type="text" @click="edit">
-            修改
-          </el-button>
-          <el-button size="small" type="text" @click="showDetail">
+          <el-button size="small" type="text" @click="edit"> 修改 </el-button>
+          <el-button size="small" type="text" @click="showChart">
             <span class="deep_blue_btn">查看效果</span>
           </el-button>
         </template>
       </el-table-column>
     </el-table>
     <add-assemble ref="edit"></add-assemble>
+    <chart-dialog ref="chart"></chart-dialog>
   </div>
 </template>
 
 <script>
-import AddAssemble from '../dialogs/addAssemble.vue';
+import AddAssemble from "../dialogs/addAssemble.vue";
+import ChartDialog from "../dialogs/chartDialog.vue";
 export default {
   name: "parentTable",
-  components: {AddAssemble},
+  components: { AddAssemble, ChartDialog },
   props: {},
   data() {
     return {
@@ -67,15 +68,11 @@ export default {
   computed: {},
   methods: {
     /**点击删除 */
-    remove(){
-       this.$confirm(
-        `是否删除该组合以及组合下商品`,
-        "提示",
-        {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-        }
-      ).then(() => {
+    remove() {
+      this.$confirm(`是否删除该组合以及组合下商品`, "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+      }).then(() => {
         this.$message({
           type: "success",
           message: "删除成功!",
@@ -83,10 +80,14 @@ export default {
       });
     },
     /**修改 */
-    edit(){
+    edit() {
       this.$refs.edit.dialogVisible = true;
-      this.$refs.edit.title = "修改组合"
-    }
+      this.$refs.edit.title = "修改组合";
+    },
+    /**查看效果 */
+    showChart() {
+      this.$refs.chart.dialogVisible = true;
+    },
   },
   mounted() {},
 };
