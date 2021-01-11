@@ -72,6 +72,7 @@ div:focus {
 .flex_container{
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   .flex_item{
     margin-right:20px;
   }
@@ -236,6 +237,13 @@ div:focus {
 }
 .orange_btn{
   color:#FE934F;
+  &:hover{
+    opacity: 0.7;
+  }
+}
+
+.gray_btn{
+  color:#444;
   &:hover{
     opacity: 0.7;
   }
