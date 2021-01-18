@@ -10,10 +10,18 @@
       <div class="bold sub">商品上报详情</div>
       <el-form ref="form" :model="form" label-width="120px">
         <el-form-item label="条形码">
-          <el-input placeholder="请输入条形码" size="small"></el-input>
+          <el-input
+            v-model="form.barCode"
+            placeholder="请输入条形码"
+            size="small"
+          ></el-input>
         </el-form-item>
         <el-form-item label="商品名称">
-          <el-input placeholder="请输入商品名称" size="small"></el-input>
+          <el-input
+            v-model="form.shortName"
+            placeholder="请输入商品名称"
+            size="small"
+          ></el-input>
         </el-form-item>
       </el-form>
 
@@ -24,9 +32,9 @@
             class="avatar-uploader"
             :show-file-list="false"
             :before-upload="beforeAvatarUpload1"
-            action=''
+            action=""
           >
-            <img v-if="frontImg" :src="frontImg" class="avatar" />
+            <img v-if="form.frontImg" :src="form.frontImg" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
           <span>正面</span>
@@ -36,10 +44,10 @@
           <el-upload
             class="avatar-uploader"
             :show-file-list="false"
-            action=''
+            action=""
             :before-upload="beforeAvatarUpload2"
           >
-            <img v-if="backImg" :src="backImg" class="avatar" />
+            <img v-if="form.backImg" :src="form.backImg" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
           <span>背面</span>
@@ -49,10 +57,10 @@
           <el-upload
             class="avatar-uploader"
             :show-file-list="false"
-            action=''
+            action=""
             :before-upload="beforeAvatarUpload3"
           >
-            <img v-if="sideImg1" :src="sideImg1" class="avatar" />
+            <img v-if="form.side1Img" :src="form.side1Img" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
           <span>侧1</span>
@@ -62,10 +70,10 @@
           <el-upload
             class="avatar-uploader"
             :show-file-list="false"
-            action=''
+            action=""
             :before-upload="beforeAvatarUpload4"
           >
-            <img v-if="sideImg2" :src="sideImg2" class="avatar" />
+            <img v-if="form.side2Img" :src="form.side2Img" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
           <span>侧2</span>
@@ -83,29 +91,30 @@
       </div>
       <div class="line"></div>
       <span slot="footer" class="dialog-footer">
-        <el-button plain @click="handleClose" size="small" >取消</el-button>
-        <el-button @click="handleSubmit" size="small" type="primary">确认</el-button>
+        <el-button plain @click="handleClose" size="small">取消</el-button>
+        <el-button @click="handleSubmit" size="small" type="primary"
+          >确认</el-button
+        >
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import _Cos from '@/utils/cos.js';
-import { upDateFile } from '@/utils/testCos';
+import _Cos from "@/utils/cos.js";
+import { addNewSku } from "@/api/sku";
 export default {
   name: "AddSku",
-  created() {
-    
-  },
+  created() {},
   data() {
     return {
       dialogVisible: false,
-      form: {},
-      frontImg: '',
-      backImg: '',
-      sideImg1: '',
-      sideImg2: ''
+      form: {
+        frontImg: "",
+        backImg: "",
+        side1Img: "",
+        side2Img: "",
+      },
     };
   },
   methods: {
@@ -114,36 +123,65 @@ export default {
     },
     beforeAvatarUpload1(e) {
       let that = this;
-      _Cos.updateFile(e, e.name).then(res => {
-        this.frontImg = 'http://' + res.Location
-      })
+      _Cos.updateFile(e, e.name).then((res) => {
+        that.form.frontImg = "http://" + res.Location;
+      });
     },
     beforeAvatarUpload2(e) {
       let that = this;
-      _Cos.updateFile(e, e.name).then(res => {
-        this.backImg = 'http://' + res.Location
-      })
+      _Cos.updateFile(e, e.name).then((res) => {
+        that.form.backImg = "http://" + res.Location;
+      });
     },
     beforeAvatarUpload3(e) {
       let that = this;
-      _Cos.updateFile(e, e.name).then(res => {
-        this.sideImg1 = 'http://' + res.Location
-      })
+      _Cos.updateFile(e, e.name).then((res) => {
+        that.form.side1Img = "http://" + res.Location;
+      });
     },
     beforeAvatarUpload4(e) {
       let that = this;
-      _Cos.updateFile(e, e.name).then(res => {
-        this.sideImg2 = 'http://' + res.Location
-      })
+      _Cos.updateFile(e, e.name).then((res) => {
+        that.form.side2Img = "http://" + res.Location;
+      });
     },
 
     // 确认提交
-    handleSubmit() {
-
-    }
+    async handleSubmit(isContinue) {
+      let form = this.form;
+      form['isContinue'] = isContinue ? true : false
+      if(!form.barCode) {
+        this.errMessage('条形码不能为空');
+        return;
+      }
+      if(!form.shortName) {
+        this.errMessage('商品名称不能为空');
+        return;
+      }
+      if(!form.frontImg) {
+        this.errMessage('请选择正面照片');
+        return;
+      }
+      if(!form.backImg) {
+        this.errMessage('请选择背面照片');
+        return;
+      }
+      if(!form.side1Img || !form.side2Img) {
+        this.errMessage('请选择侧面照片');
+        return;
+      }
+      if(!form.backImg) {
+        this.errMessage('请选择背面照片');
+        return;
+      }
+      let addSkuResult = await addNewSku(form);
+      if(addSkuResult.resultCode) {
+        this.sucMessage('新增成功');
+        this.dialogVisible = false;
+      }
+    },
   },
-  mounted() {
-  },
+  mounted() {},
 };
 </script>
 <style lang="scss" scoped>
@@ -161,6 +199,10 @@ export default {
   font-size: 16px;
   color: #222;
   margin: 20px 0;
+}
+.avatar {
+  width: 160px;
+  height: 160px;
 }
 
 .img_wrapper {

@@ -274,7 +274,7 @@
         
       </span>
     </el-dialog>
-    <reject-dialog ref="reject"></reject-dialog>
+    <!-- <reject-dialog ref="reject"></reject-dialog> -->
   </div>
 </template>
 

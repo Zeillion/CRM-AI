@@ -25,7 +25,7 @@
       <el-table-column prop="brand" label="商品品牌"> </el-table-column>
       <el-table-column prop="packageType" label="包装形式"> </el-table-column>
       <el-table-column label="操作" width="120">
-        <template slot-scope="{ row }">
+        <template :slot-scope="{ row }">
           <el-button size="small" type="text" @click="toModel"
             >完成建模</el-button
           >

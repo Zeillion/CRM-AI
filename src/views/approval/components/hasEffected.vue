@@ -34,7 +34,7 @@
       <el-table-column prop="time" label="新增时间"> </el-table-column>
 
       <el-table-column label="操作" width="120">
-        <template slot-scope="{ row }">
+        <template :slot-scope="{ row }">
           <el-button size="small" type="text" @click="showRecord"
             >操作记录</el-button
           >

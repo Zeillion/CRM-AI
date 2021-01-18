@@ -382,7 +382,7 @@
         <el-button plain @click="handleClose" size="small">关闭</el-button>
       </span>
     </el-dialog>
-    <reject-dialog ref="reject"></reject-dialog>
+    <!-- <reject-dialog ref="reject"></reject-dialog> -->
   </div>
 </template>
 

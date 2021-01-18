@@ -334,7 +334,7 @@
           >
         </span>
       </el-dialog>
-      <reject-dialog ref="reject"></reject-dialog>
+      <!-- <reject-dialog ref="reject"></reject-dialog> -->
       <Upload ref="upload" />
     </div>
   </div>

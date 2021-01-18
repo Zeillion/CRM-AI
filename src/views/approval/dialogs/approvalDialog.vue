@@ -7,24 +7,25 @@
       :before-close="closeModel"
       :close-on-click-modal="false"
       :show-close="false"
+      v-loading="loading"
     >
       <div class="body">
         <div class="top">
           <div class="bold flex_wrapper" style="line-height: 27px" >
            <div style="color:#1F2D3D">商品上报详情:</div> 
             <span style="color:#FF5664;margin-left:10px" class="flex">待审批</span>
-            <div style="color:#8492A6">申请时间：2020-12-12 14:00:00</div>
+            <div style="color:#8492A6">申请时间：{{!loading ? detail.createTime : ''}}</div>
           </div>
         </div>
         <div class="middle" style="color: #1f2d3d; line-height: 27px">
-          <div>条形码：834729873947</div>
+          <div>条形码：{{!loading ? detail.barCode : ''}}</div>
           <div>商品名称：雪花具象脸谱8.0*P330ml罐纸箱</div>
           <div class="line"></div>
           <div class="bold" style="color: #222; font-size: 16px">上报图：</div>
           <div class="flex_wrapper">
             <!-- 图片wrapper -->
             <div class="img_wrapper flex_vertical">
-              <el-image :src="img">
+              <el-image :src="!loading ? detail.frontImg : ''">
                 <div slot="error" class="image-slot">
                   <i class="el-icon-picture-outline"></i>
                 </div>
@@ -33,7 +34,7 @@
             </div>
 
             <div class="img_wrapper flex_vertical">
-              <el-image :src="img">
+              <el-image :src="!loading ? detail.backImg : ''">
                 <div slot="error" class="image-slot">
                   <i class="el-icon-picture-outline"></i>
                 </div>
@@ -42,7 +43,7 @@
             </div>
 
             <div class="img_wrapper flex_vertical">
-              <el-image :src="img">
+              <el-image :src="!loading ? detail.side1Img : ''">
                 <div slot="error" class="image-slot">
                   <i class="el-icon-picture-outline"></i>
                 </div>
@@ -51,7 +52,7 @@
             </div>
 
             <div class="img_wrapper flex_vertical">
-              <el-image :src="img">
+              <el-image :src="!loading ? detail.side2Img : ''">
                 <div slot="error" class="image-slot">
                   <i class="el-icon-picture-outline"></i>
                 </div>
@@ -110,7 +111,7 @@
             </div>
           </div>
       </div>
-      <reject-dialog ref="reject"></reject-dialog>
+      <!-- <reject-dialog ref="reject"></reject-dialog> -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleClose" size="small" type="info">驳回</el-button>
         <el-button type="primary" @click="handlePass" size="small">
@@ -131,7 +132,12 @@ export default {
   components: {
     rejectDialog,
   },
-  props: {},
+  props: {
+    detail: {
+      type: Object,
+      default: {}
+    }
+  },
   data() {
     return {
       dialogVisible: false,
@@ -140,7 +146,11 @@ export default {
     };
   },
   watch: {},
-  computed: {},
+  computed: {
+    loading() {
+      return JSON.stringify(this.detail) !== '{}' ? false : true
+    }
+  },
   methods: {
     closeModel() {
       this.dialogVisible = false;

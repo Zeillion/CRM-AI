@@ -42,6 +42,7 @@ export default {
   data() {
     return {
       uploadShow: false,
+      fileList: []
     };
   },
   watch: {},
@@ -53,6 +54,18 @@ export default {
     submitUpload() {
       this.uploadShow = false;
     },
+    handlePreview() {
+
+    },
+    handleRemove() {
+
+    },
+    beforeRemove() {
+
+    },
+    handleExceed() {
+      
+    }
   },
   mounted() {},
 };
