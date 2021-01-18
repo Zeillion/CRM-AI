@@ -318,6 +318,9 @@ export default {
     handleClose() {
       this.dialogVisible = false;
     },
+    upload() {
+
+    },
 
     // 保存并通过
     confirm() {

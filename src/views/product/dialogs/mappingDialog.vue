@@ -452,6 +452,9 @@ export default {
     cancel() {
       this.dialogVisible = false;
     },
+    onSubmit() {
+
+    },
     /**点击三角形 */
     handleCollapse(row) {
       row.rotate = !row.rotate;

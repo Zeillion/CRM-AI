@@ -3,7 +3,6 @@
     <el-dialog
       :visible.sync="dialogVisible"
       width="820px"
-      :before-close="handleClose"
       :close-on-click-modal="false"
       :show-close="false"
     >
@@ -24,10 +23,10 @@
           <el-upload
             class="avatar-uploader"
             :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload"
+            :before-upload="beforeAvatarUpload1"
+            action=''
           >
-            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <img v-if="frontImg" :src="frontImg" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
           <span>正面</span>
@@ -37,10 +36,10 @@
           <el-upload
             class="avatar-uploader"
             :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload"
+            action=''
+            :before-upload="beforeAvatarUpload2"
           >
-            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <img v-if="backImg" :src="backImg" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
           <span>背面</span>
@@ -50,10 +49,10 @@
           <el-upload
             class="avatar-uploader"
             :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload"
+            action=''
+            :before-upload="beforeAvatarUpload3"
           >
-            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <img v-if="sideImg1" :src="sideImg1" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
           <span>侧1</span>
@@ -63,10 +62,10 @@
           <el-upload
             class="avatar-uploader"
             :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload"
+            action=''
+            :before-upload="beforeAvatarUpload4"
           >
-            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <img v-if="sideImg2" :src="sideImg2" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
           <span>侧2</span>
@@ -85,31 +84,66 @@
       <div class="line"></div>
       <span slot="footer" class="dialog-footer">
         <el-button plain @click="handleClose" size="small" >取消</el-button>
-        <el-button @click="handleClose" size="small" type="primary">确认</el-button>
+        <el-button @click="handleSubmit" size="small" type="primary">确认</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import _Cos from '@/utils/cos.js';
+import { upDateFile } from '@/utils/testCos';
 export default {
   name: "AddSku",
-  components: {},
-  props: {},
+  created() {
+    
+  },
   data() {
     return {
       dialogVisible: false,
       form: {},
+      frontImg: '',
+      backImg: '',
+      sideImg1: '',
+      sideImg2: ''
     };
   },
-  watch: {},
-  computed: {},
   methods: {
     handleClose() {
       this.dialogVisible = false;
     },
+    beforeAvatarUpload1(e) {
+      let that = this;
+      _Cos.updateFile(e, e.name).then(res => {
+        this.frontImg = 'http://' + res.Location
+      })
+    },
+    beforeAvatarUpload2(e) {
+      let that = this;
+      _Cos.updateFile(e, e.name).then(res => {
+        this.backImg = 'http://' + res.Location
+      })
+    },
+    beforeAvatarUpload3(e) {
+      let that = this;
+      _Cos.updateFile(e, e.name).then(res => {
+        this.sideImg1 = 'http://' + res.Location
+      })
+    },
+    beforeAvatarUpload4(e) {
+      let that = this;
+      _Cos.updateFile(e, e.name).then(res => {
+        this.sideImg2 = 'http://' + res.Location
+      })
+    },
+
+    // 确认提交
+    handleSubmit() {
+
+    }
   },
-  mounted() {},
+  mounted() {
+  },
 };
 </script>
 <style lang="scss" scoped>

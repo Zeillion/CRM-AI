@@ -1,12 +1,13 @@
-import COS from "cos-js-sdk-v5"
+import COS from "./cos-js-sdk-v5.min.js"
 import { cosAuth } from "@/api/cosAuth"
 // 初始化数据
 const defaultData = {
   // SecretId: "AKIDiBMM4UqWz96lF4OsrZzBbjCNL1UgGGck",
   // SecretKey: "zt8QQ9gw1ye4E7lCqIdiaATYS5WnnWyC",
-  Bucket: process.env.NODE_ENV == "production" ? 'xuehua-mp-mps-prod-1259627966' : 'xuehua-mp-mps-dev-1259627966', /* 必须 */
-  Region: "ap-shanghai",
+  Bucket: process.env.NODE_ENV == "production" ? 'crm-ai-prd-1259627966' : 'crm-ai-dev-1259627966', /* 必须 */
+  Region: "ap-chengdu",
 };
+// https://test-1254001891.cos.ap-nanjing.myqcloud.com
 let getDate = `${new Date().getFullYear()}-${new Date().getMonth() +
   1}-${new Date().getDate()}`;
 // 上传文件的key值 保证唯一性
@@ -81,6 +82,8 @@ class _Cos {
           },
         },
         function (err, data) {
+          console.log('err', err);
+          console.log('data', data)
           if (err) {
             reject(err);
           }
@@ -156,5 +159,3 @@ class _Cos {
 
 
 export default new _Cos();
-
-
