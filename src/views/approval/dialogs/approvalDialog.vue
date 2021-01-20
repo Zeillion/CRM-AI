@@ -7,25 +7,28 @@
       :before-close="closeModel"
       :close-on-click-modal="false"
       :show-close="false"
-      v-loading="loading"
     >
       <div class="body">
         <div class="top">
-          <div class="bold flex_wrapper" style="line-height: 27px" >
-           <div style="color:#1F2D3D">商品上报详情:</div> 
-            <span style="color:#FF5664;margin-left:10px" class="flex">待审批</span>
-            <div style="color:#8492A6">申请时间：{{!loading ? detail.createTime : ''}}</div>
+          <div class="bold flex_wrapper" style="line-height: 27px">
+            <div style="color: #1f2d3d">商品上报详情:</div>
+            <span style="color: #ff5664; margin-left: 10px" class="flex"
+              >待审批</span
+            >
+            <div style="color: #8492a6">
+              申请时间：{{ detail ? detail.createTime : "" }}
+            </div>
           </div>
         </div>
         <div class="middle" style="color: #1f2d3d; line-height: 27px">
-          <div>条形码：{{!loading ? detail.barCode : ''}}</div>
-          <div>商品名称：雪花具象脸谱8.0*P330ml罐纸箱</div>
+          <div>条形码：{{ detail ? detail.barCode : "" }}</div>
+          <div>商品名称：{{ detail ? detail.fullName : "" }}</div>
           <div class="line"></div>
           <div class="bold" style="color: #222; font-size: 16px">上报图：</div>
           <div class="flex_wrapper">
             <!-- 图片wrapper -->
             <div class="img_wrapper flex_vertical">
-              <el-image :src="!loading ? detail.frontImg : ''">
+              <el-image :src="detail ? detail.frontImg : ''">
                 <div slot="error" class="image-slot">
                   <i class="el-icon-picture-outline"></i>
                 </div>
@@ -34,7 +37,7 @@
             </div>
 
             <div class="img_wrapper flex_vertical">
-              <el-image :src="!loading ? detail.backImg : ''">
+              <el-image :src="detail ? detail.backImg : ''">
                 <div slot="error" class="image-slot">
                   <i class="el-icon-picture-outline"></i>
                 </div>
@@ -43,7 +46,7 @@
             </div>
 
             <div class="img_wrapper flex_vertical">
-              <el-image :src="!loading ? detail.side1Img : ''">
+              <el-image :src="detail ? detail.side1Img : ''">
                 <div slot="error" class="image-slot">
                   <i class="el-icon-picture-outline"></i>
                 </div>
@@ -52,7 +55,7 @@
             </div>
 
             <div class="img_wrapper flex_vertical">
-              <el-image :src="!loading ? detail.side2Img : ''">
+              <el-image :src="detail ? detail.side2Img : ''">
                 <div slot="error" class="image-slot">
                   <i class="el-icon-picture-outline"></i>
                 </div>
@@ -67,57 +70,38 @@
           <div class="bold" style="color: #444">人员信息:</div>
         </div>
         <div style="line-height: 27px; color: #444">
-          <div>申请人：湖南大区-张三</div>
-          <div>申请人手机号：150340340349</div>
+          <div>申请人：{{detail ? detail.createPerson : ''}}</div>
+          <div>申请人手机号：{{detail ? detail.contactPhone : ''}}</div>
         </div>
         <div class="line"></div>
-          <div class="bold other" >该条形码其他产品</div>
-          <div class="flex_wrapper">
-            <!-- 图片wrapper -->
-            <div class="img_wrapper flex_vertical">
-              <el-image :src="img">
+        <div class="bold other">该条形码其他产品</div>
+        <div class="flex_wrapper">
+          <!-- 图片wrapper -->
+          <div class="other-sku-main" v-if="detail && detail.otherSku.length">
+            <div
+              class="img_wrapper flex_vertical"
+              :key="'other_' + i"
+              v-for="(val, i) in detail.otherSku"
+            >
+              <el-image :src="val.frontImg">
                 <div slot="error" class="image-slot">
                   <i class="el-icon-picture-outline"></i>
                 </div>
               </el-image>
-              <span>SKU!</span>
-            </div>
-
-            <div class="img_wrapper flex_vertical">
-              <el-image :src="img">
-                <div slot="error" class="image-slot">
-                  <i class="el-icon-picture-outline"></i>
-                </div>
-              </el-image>
-              <span>SKU2</span>
-            </div>
-
-            <div class="img_wrapper flex_vertical">
-              <el-image :src="img">
-                <div slot="error" class="image-slot">
-                  <i class="el-icon-picture-outline"></i>
-                </div>
-              </el-image>
-              <span>SKU3</span>
-            </div>
-
-            <div class="img_wrapper flex_vertical">
-              <el-image :src="img">
-                <div slot="error" class="image-slot">
-                  <i class="el-icon-picture-outline"></i>
-                </div>
-              </el-image>
-              <span>SKU4</span>
+              <span>{{ val.shortName }}</span>
             </div>
           </div>
+        </div>
       </div>
-      <!-- <reject-dialog ref="reject"></reject-dialog> -->
+      <reject-dialog ref="reject" @rejectSuccess="rejectSuccess" :approvalId="detail ? detail.approvalId : ''" :status="1"></reject-dialog>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleClose" size="small" type="info">驳回</el-button>
+        <el-button @click="handleReject" size="small" type="info"
+          >驳回</el-button
+        >
         <el-button type="primary" @click="handlePass" size="small">
           通过</el-button
         >
-         <el-button plain @click="dialogVisible = false" size="small">
+        <el-button plain @click="dialogVisible = false" size="small">
           关闭</el-button
         >
       </span>
@@ -127,6 +111,9 @@
 
 <script>
 import rejectDialog from "./rejectDialog";
+import {
+  approvalPass
+} from '@/api/sku';
 export default {
   name: "approvalDialog",
   components: {
@@ -135,52 +122,57 @@ export default {
   props: {
     detail: {
       type: Object,
-      default: {}
-    }
+      default: null,
+    },
   },
   data() {
     return {
       dialogVisible: false,
-      img: require("../../../assets/images/beer.jpeg"),
-      target: "雪花-脸谱300ml",
     };
-  },
-  watch: {},
-  computed: {
-    loading() {
-      return JSON.stringify(this.detail) !== '{}' ? false : true
-    }
   },
   methods: {
     closeModel() {
       this.dialogVisible = false;
     },
-    handleClose() {
-      this.dialogVisible = false;
+    handleReject() {
       this.$refs.reject.dialogVisible = true;
-      this.$refs.reject.target = this.target;
+      this.$refs.reject.target = this.detail.fullName;
     },
-    handlePass() {
+
+    // 驳回成功回调
+    rejectSuccess() {
+      this.$store.dispatch('getSkuTableMessage')
+      this.dialogVisible = false;
+    },
+    // 通过申请
+    async handlePass() {
+      let that = this;
       this.$confirm(
-        `是否通过新增【${this.target}】的申请？确认后将给该产品建档`,
+        `是否通过新增【${this.detail.fullName}】的申请？确认后将给该产品建档`,
         "提示",
         {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning",
         }
-      ).then(() => {
+      ).then(async () => {
+        await approvalPass({
+          approvalId: that.detail.approvalId
+        })
         this.$message({
           type: "success",
           message: "操作成功!",
         });
       });
     },
-  },
-  mounted() {},
+  }
 };
 </script>
 <style lang="scss" scoped>
+.other-sku-main {
+  display: flex;
+  flex-wrap: wrap;
+}
 .img_wrapper {
   margin: 4px;
   width: 160px;
@@ -191,24 +183,24 @@ export default {
     font-size: 14px;
   }
 }
-.body{
-  margin-top:-40px;
-  .top{
+.body {
+  margin-top: -40px;
+  .top {
     font-size: 16px;
   }
-  .middle{
-    margin-top:20px;
+  .middle {
+    margin-top: 20px;
   }
-  .bottom{
-    .bold{
+  .bottom {
+    .bold {
       font-size: 16px;
-      margin-bottom:15px;
+      margin-bottom: 15px;
     }
   }
-  .other{
-    color:#444;
+  .other {
+    color: #444;
     font-size: 16px;
-    margin:20px 0;
+    margin: 20px 0;
   }
 }
 </style>

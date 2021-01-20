@@ -1,14 +1,13 @@
 <template>
-  <div :class="{'hidden':hidden}" class="pagination-container">
+  <div :class="{ hidden: hidden }" class="pagination-container">
     <el-pagination
+      :hide-on-single-page="total < pageSize ? true : false"
       :background="background"
       :current-page.sync="currentPage"
-      :page-size.sync="pageSize"
       :layout="layout"
       :page-sizes="pageSizes"
       :total="total"
       v-bind="$attrs"
-      @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
   </div>
@@ -54,7 +53,7 @@ export default {
     hidden: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   computed: {
     currentPage: {
@@ -85,7 +84,7 @@ export default {
       this.$emit("pagination", { page: val, limit: this.pageSize });
       if (this.autoScroll) {
         scrollTo(0, 800);
-      }
+      }x
     },
   },
 };
@@ -127,9 +126,8 @@ export default {
   .el-pagination .el-select .el-input .el-input__inner {
     height: 28px;
   }
-  
 }
-.el-pagination__total{
-    line-height:28px!important;
-  }
+.el-pagination__total {
+  line-height: 28px !important;
+}
 </style>

@@ -17,10 +17,10 @@
           <div>
             <el-select
               v-model="value"
-              placeholder="请选择"
+              placeholder="快捷回复"
               size="small"
               class="select"
-              style="width:100%"
+              style="width: 100%"
             >
               <el-option
                 v-for="item in options"
@@ -36,7 +36,7 @@
               size="small"
               class="select"
               v-if="status == 3"
-              style="width:100%"
+              style="width: 100%"
             >
               <el-option
                 v-for="item in options"
@@ -48,7 +48,7 @@
             </el-select>
             <el-input
               type="textarea"
-              :autosize="{minRows:4,maxRows:6}"
+              :autosize="{ minRows: 4, maxRows: 6 }"
               placeholder="请输入内容"
               v-model="textarea"
             >
@@ -66,16 +66,21 @@
 </template>
 
 <script>
+import { approvalReject } from "@/api/sku";
 export default {
   name: "rejectDialog",
-  components: {},
-  props: {},
+  props: {
+    //1：待审批，2:待建档，3待确认，4待建模
+    status: {
+      type: Number,
+    },
+    approvalId: Number || String,
+  },
   data() {
     return {
       dialogVisible: false,
       target: "",
       textarea: "",
-      status:1,//1：待审批，2:待建档，3待确认，4待建模
       options: [
         {
           value: "选项1",
@@ -101,16 +106,19 @@ export default {
       value: "",
     };
   },
-  watch: {},
-  computed: {},
   methods: {
     handleClose() {
       this.dialogVisible = false;
-  
     },
-    confirm(){
-      this.handleClose();
-    }
+    async confirm() {
+      await approvalReject({
+        approvalId: this.approvalId,
+        commit: this.textarea || this.value
+      })
+      this.dialogVisible = false;
+      this.sucMessage('驳回成功');
+      this.$emit('rejectSuccess')
+    },
   },
   mounted() {},
 };
@@ -133,6 +141,5 @@ export default {
   .select {
     margin-bottom: 18px;
   }
- 
 }
 </style>

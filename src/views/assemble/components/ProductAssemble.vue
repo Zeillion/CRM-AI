@@ -318,12 +318,8 @@ export default {
           this.showAssBtn = false;
           this.showProBtn = true;
           this.targetData = data.product;
-          debugger
           this.componentName = "leafTable";
           // 模拟
-          debugger
-          
-
         }
       } else if (
         (data.layer == 1 || data.layer == 2) &&

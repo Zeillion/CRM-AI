@@ -8,7 +8,7 @@
         <div class="flex_container">
           <el-form-item>
             <el-input
-              v-model="form.queryField"
+              v-model="queryField"
               placeholder="条形码/商品全称"
               size="small"
             />
@@ -41,17 +41,36 @@
         <div class="flex_container">
           <el-form-item class="flex_item">
             <el-select v-model="form.type" placeholder="商品类型" size="small">
-              <el-option v-for="(item, index) in product_type" :key="'product_type' + index" :label="item.desc" :value="item.desc"></el-option>
+              <el-option
+                v-for="(item, index) in product_type"
+                :key="'product_type' + index"
+                :label="item.desc || ''"
+                :value="item.desc || '--取消选择--'"
+              ></el-option>
             </el-select>
           </el-form-item>
           <el-form-item class="flex_item">
             <el-select v-model="form.brand" placeholder="商品品牌" size="small">
-              <el-option v-for="(item, index) in product_brand" :key="'product_brand' + index" :label="item.desc" :value="item.desc"></el-option>
+              <el-option
+                v-for="(item, index) in product_brand"
+                :key="'product_brand' + index"
+                :label="item.desc"
+                :value="item.desc || '--取消选择--'"
+              ></el-option>
             </el-select>
           </el-form-item>
           <el-form-item class="flex_item">
-            <el-select v-model="form.packagingForm" placeholder="包装形式" size="small">
-              <el-option v-for="(item, index) in product_packaging_form" :key="'product_packaging_form' + index" :label="item.desc" :value="item.desc"></el-option>
+            <el-select
+              v-model="form.packagingForm"
+              placeholder="包装形式"
+              size="small"
+            >
+              <el-option
+                v-for="(item, index) in product_packaging_form"
+                :key="'product_packaging_form' + index"
+                :label="item.desc"
+                :value="item.desc"
+              ></el-option>
             </el-select>
           </el-form-item>
         </div>
@@ -66,14 +85,16 @@
           :name="item.value"
           :key="index"
         >
-          <component :is="componentName" :tableData="tableData"></component>
+          <component
+            :is="componentName"
+            :tableData="tableMessage"
+          ></component>
         </el-tab-pane>
       </el-tabs>
     </div>
 
     <Pagination
-      v-show="total > 9"
-      :total="total"
+      :total="tableTotal"
       :limit.sync="pageSize"
       :page.sync="pageNum"
       @pagination="getTableMessage"
@@ -85,7 +106,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import HasEffected from "./components/hasEffected";
 import ToApproval from "./components/toApproval";
 import ToConfirm from "./components/toConfirm";
@@ -108,22 +129,17 @@ export default {
     AddSku,
     AddFile,
   },
-  computed: {
-    ...mapGetters(["name"]),
-  },
   data() {
     return {
       componentName: "ToApproval",
       activeTab: "1",
-      pageSize: 10,
-      pageNum: 1,
-      total: 0,
+      queryField: "",
       form: {
-        queryField: "",
         type: "",
         brand: "",
         packagingForm: "",
       },
+      pageNum: 1,
       tabList: [
         {
           label: "已生效sku",
@@ -146,32 +162,15 @@ export default {
           value: "4",
         },
       ],
-      product_type: [], // 产品类型筛选列表
-      product_brand: [], // 产品品牌筛选列表
-      product_packaging_form: [], // 包装形式筛选列表
-      tableData: [], // table数据
     };
   },
   created() {
-    this.getFilterCondition();
+    this.$store.dispatch("getSearchMessage");
     this.getTableMessage();
   },
   methods: {
-    onSubmit() {},
-
-    // 获取用于查询条件的数据
-    async getFilterCondition() {
-      let result = await findCondition({
-        typeList: ["product_type", "product_brand", "product_packaging_form"],
-      });
-      let dictTypeList = result.dictTypeList;
-
-      for (let i = 0; i < dictTypeList.length; i++) {
-        let dictTypeItem = dictTypeList[i]
-        this.product_type = dictTypeItem.type === 'product_type' ? dictTypeItem.dataList : this.product_type;
-        this.product_brand = dictTypeItem.type === 'product_brand' ? dictTypeItem.dataList : this.product_brand;
-        this.product_packaging_form = dictTypeItem.type === 'product_packaging_form' ? dictTypeItem.dataList : this.product_packaging_form;
-      }
+    onSubmit() {
+      this.getTableMessage()
     },
 
     /**
@@ -179,37 +178,28 @@ export default {
      */
     async getTableMessage() {
       let activeTab = this.activeTab;
-      let approvalStatus = 
-        activeTab == 0 ? '' :
-        activeTab == 1 ? 'pending' :
-        activeTab == 2 ? 'waitingArchives' :
-        activeTab == 3 ? 'waitingConfirmed' : 'waitingModeled';
+      let approvalStatus =
+        activeTab == 0
+          ? ""
+          : activeTab == 1
+          ? "pending"
+          : activeTab == 2
+          ? "waitingArchives"
+          : activeTab == 3
+          ? "waitingConfirmed"
+          : "waitingModeled";
 
-      let result = await querySkuTableList({
-        pageNum: this.pageNum,
-        pageSize: this.pageSize,
+      this.$store.dispatch("getSkuTableMessage", {
         filter: {
           ...this.form,
-          approvalStatus
-        }
-      })
-      this.total = result.total;
-      result.rows.map(item => {
-        // 拼接处理24位图
-        item.polyhedralImg = (item.polyhedralImg && item.polyhedralImg.split(',')) || [];
-        if(item.polyhedralImg.length) {
-          for(let i = 0; i < item.polyhedralImg.length; i ++) {
-            item.polyhedralImg[i] = 'http://' + item.polyhedralImg[i]
-          }
-        }
-      })
-      this.tableData = result.rows;
-
-      console.log(this.tableData)
+          queryField: this.queryField,
+          approvalStatus,
+        },
+      });
     },
     handleTab(data, e) {
-      this.pageNum = 1;
       let str = data.name;
+      this.$store.commit("resetPageNum");
       switch (str) {
         case "0":
           this.componentName = "HasEffected";
@@ -238,23 +228,34 @@ export default {
     },
   },
   watch: {
-    'form.type'(val) {
-      this.pageNum = 1;
-      this.getTableMessage();
+    form: {
+      handler(val) {
+        this.$store.commit("resetPageNum");
+        this.getTableMessage();
+      },
+      deep: true,
     },
-    'form.brand'(val) {
-      this.pageNum = 1;
-      this.getTableMessage();
-    },
-    'form.packagingForm'(val) {
-      this.pageNum = 1;
-      this.getTableMessage();
-    },
+
     activeTab() {
-      this.pageNum = 1;
+      this.$store.commit("resetPageNum");
       this.getTableMessage();
+    },
+    pageNumber(val) {
+      this.pageNum = val
     }
-  }
+  },
+  computed: {
+    ...mapGetters(["name"]),
+    ...mapState({
+      tableMessage: (state) => state.skuStore.tableMessage, // table 数据
+      tableTotal: (state) => state.skuStore.tableTotal, // table 总条数
+      pageSize: (state) => state.skuStore.pageSize, // 每页条数
+      pageNumber: (state) => state.skuStore.pageNum, // 当前页
+      product_type: (state) => state.skuStore.product_type, // 搜索用的商品类型
+      product_brand: (state) => state.skuStore.product_brand, // 搜索用的商品品牌
+      product_packaging_form: (state) => state.skuStore.product_packaging_form, // 搜索用的商品包装形式
+    }),
+  },
 };
 </script>
 

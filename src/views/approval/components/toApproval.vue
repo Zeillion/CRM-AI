@@ -26,7 +26,9 @@
       <el-table-column prop="time" label="上报时间"> </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button size="small" type="text" @click="approval(scope.row)">审批</el-button>
+          <el-button size="small" type="text" @click="approval(scope.row)"
+            >审批</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -61,24 +63,24 @@ export default {
   computed: {},
   methods: {
     async approval(e) {
-      this.$refs.approval.dialogVisible = true;
+      let that = this;
+      that.$refs.approval.dialogVisible = true;
       let result = await getApprovalDetail({
-        approvalId: e.approvalId
-      })
-      this.detail = {
-        ...result, 
-        'frontImg': e.frontImg
-      }
-      console.log(this.detail)
+        approvalId: e.approvalId,
+      });
+      that.detail = {
+        ...result,
+        frontImg: e.frontImg,
+      };
     },
   },
   mounted() {},
 };
 </script>
 <style lang="scss" scoped>
-  .product-frontImg{
-    width: 60px;
-    height: 60px;
-    display: block;
-  }
+.product-frontImg {
+  width: 60px;
+  height: 60px;
+  display: block;
+}
 </style>
